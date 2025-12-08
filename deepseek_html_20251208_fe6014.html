@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Invisible Audit Layer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>InvisibleAudit</span>
+            </a>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                <a href="dashboard.html" class="nav-link active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="audit.html" class="nav-link"><i class="fas fa-search"></i> Audit</a>
+                <a href="badges.html" class="nav-link"><i class="fas fa-award"></i> Badges</a>
+                <a href="profile.html" class="nav-link"><i class="fas fa-user"></i> Profile</a>
+            </div>
+            <button class="connect-wallet-btn">
+                <i class="fas fa-plug"></i> Connect Wallet
+            </button>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="page-header">
+            <h1>Dashboard</h1>
+            <p>Monitor your audit history and security metrics</p>
+        </div>
+
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <div class="stat-icon blue">
+                    <i class="fas fa-file-contract"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-value total-audits">0</div>
+                    <div class="stat-label">Total Audits</div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon green">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-value avg-score">0</div>
+                    <div class="stat-label">Avg Risk Score</div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon orange">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-value high-risk">0</div>
+                    <div class="stat-label">High Risk Audits</div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon purple">
+                    <i class="fas fa-badge-check"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Audit Badges</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <h2>Recent Audits</h2>
+            <div class="audit-history">
+                <!-- Filled by JavaScript -->
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <h2>Quick Actions</h2>
+            <div class="quick-actions">
+                <a href="audit.html" class="quick-action-card">
+                    <div class="action-icon blue">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <h3>New Audit</h3>
+                    <p>Submit contract for invisible audit</p>
+                </a>
+                
+                <a href="badges.html" class="quick-action-card">
+                    <div class="action-icon purple">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Mint Badges</h3>
+                    <p>Create verifiable audit NFTs</p>
+                </a>
+                
+                <a href="#" class="quick-action-card">
+                    <div class="action-icon green">
+                        <i class="fas fa-file-export"></i>
+                    </div>
+                    <h3>Export Reports</h3>
+                    <p>Download audit certificates</p>
+                </a>
+                
+                <a href="#" class="quick-action-card">
+                    <div class="action-icon orange">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>Team Access</h3>
+                    <p>Manage team permissions</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>© 2024 Invisible Audit Layer. All rights reserved. Built with FHE.</p>
+                <div class="tech-badges">
+                    <span class="tech-badge">FHEVM</span>
+                    <span class="tech-badge">Zero-Knowledge</span>
+                    <span class="tech-badge">Ethereum</span>
+                    <span class="tech-badge">Polygon</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="mobile-nav-overlay">
+        <div class="mobile-nav-content">
+            <button class="close-mobile-nav"><i class="fas fa-times"></i></button>
+            <div class="mobile-nav-links">
+                <a href="index.html" class="mobile-nav-link"><i class="fas fa-home"></i> Home</a>
+                <a href="dashboard.html" class="mobile-nav-link active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="audit.html" class="mobile-nav-link"><i class="fas fa-search"></i> Audit</a>
+                <a href="badges.html" class="mobile-nav-link"><i class="fas fa-award"></i> Badges</a>
+                <a href="profile.html" class="mobile-nav-link"><i class="fas fa-user"></i> Profile</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="demo.js"></script>
+    <style>
+        .page-header {
+            padding: 3rem 0 2rem;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+        
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .stat-icon.blue { background: var(--primary); }
+        .stat-icon.green { background: var(--secondary); }
+        .stat-icon.orange { background: var(--warning); }
+        .stat-icon.purple { background: #8b5cf6; }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+            line-height: 1;
+        }
+        
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        .dashboard-section {
+            margin-bottom: 3rem;
+        }
+        
+        .dashboard-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .audit-history {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .audit-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .audit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .risk-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .risk-low { background: #d1fae5; color: #065f46; }
+        .risk-medium { background: #fef3c7; color: #92400e; }
+        .risk-high { background: #fee2e2; color: #991b1b; }
+        
+        .audit-details {
+            margin-bottom: 1rem;
+        }
+        
+        .audit-details p {
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+        }
+        
+        .audit-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .quick-action-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .quick-action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+        
+        .action-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            margin: 0 auto 1rem;
+        }
+        
+        .quick-action-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quick-action-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .quick-actions {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+            
+            .audit-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .audit-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</body>
+</html>
