@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invisible Audit Layer | Privacy-Preserving Smart Contract Security</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="assets/shield-icon.svg">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>InvisibleAudit</span>
+            </a>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+                <a href="dashboard.html" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="audit.html" class="nav-link"><i class="fas fa-search"></i> Audit</a>
+                <a href="badges.html" class="nav-link"><i class="fas fa-award"></i> Badges</a>
+                <a href="profile.html" class="nav-link"><i class="fas fa-user"></i> Profile</a>
+            </div>
+            <button class="connect-wallet-btn">
+                <i class="fas fa-plug"></i> Connect Wallet
+            </button>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">Privacy-Preserving</span><br>
+                    Smart Contract Audits
+                </h1>
+                <p class="hero-subtitle">
+                    Get your smart contracts audited without revealing sensitive logic.<br>
+                    Zero knowledge. Maximum security.
+                </p>
+                <div class="hero-buttons">
+                    <a href="audit.html" class="btn-primary">
+                        <i class="fas fa-rocket"></i> Start Free Audit
+                    </a>
+                    <a href="#how-it-works" class="btn-secondary">
+                        <i class="fas fa-play-circle"></i> How It Works
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">1,247+</div>
+                        <div class="stat-label">Contracts Audited</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">99.7%</div>
+                        <div class="stat-label">Security Score</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">48+</div>
+                        <div class="stat-label">Audit Firms</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="visual-card">
+                    <div class="visual-header">
+                        <div class="visual-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <div class="visual-title">Encrypted Audit Process</div>
+                    </div>
+                    <div class="visual-content">
+                        <div class="process-step">
+                            <div class="step-icon"><i class="fas fa-lock"></i></div>
+                            <div class="step-text">Contract Encrypted</div>
+                            <div class="step-arrow">→</div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-icon"><i class="fas fa-eye-slash"></i></div>
+                            <div class="step-text">Invisible Analysis</div>
+                            <div class="step-arrow">→</div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-icon"><i class="fas fa-shield-check"></i></div>
+                            <div class="step-text">Secure Results</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Fully Homomorphic Encryption enables dual-sided privacy</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon blue">
+                        <i class="fas fa-upload"></i>
+                    </div>
+                    <h3>1. Upload Config (Encrypted)</h3>
+                    <p>Submit your contract parameters in encrypted format. No logic revealed.</p>
+                    <div class="feature-code">
+                        <code>encrypt({"feeRate": 30, "maxLeverage": 10})</code>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon purple">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>2. Run Invisible Audit</h3>
+                    <p>Our FHE engine analyzes without decryption. Auditor's rules remain hidden.</p>
+                    <div class="feature-code">
+                        <code>fhe_evaluate(encrypted_inputs)</code>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon green">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h3>3. Receive Encrypted Score</h3>
+                    <p>Get risk assessment in encrypted format. Only you can decrypt results.</p>
+                    <div class="feature-code">
+                        <code>decrypt(encrypted_score) → "Risk: 15/100"</code>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon orange">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>4. Mint Audit Badge</h3>
+                    <p>Receive verifiable NFT badge without revealing sensitive scores.</p>
+                    <div class="feature-code">
+                        <code>mintBadge(tokenURI)</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Matrix -->
+    <section class="privacy-matrix">
+        <div class="container">
+            <h2 class="section-title">Dual-Sided Privacy Matrix</h2>
+            
+            <div class="matrix-container">
+                <table class="matrix-table">
+                    <thead>
+                        <tr>
+                            <th>Layer</th>
+                            <th>Hidden from Project</th>
+                            <th>Hidden from Auditor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Inputs</strong></td>
+                            <td>❌ Nothing (Project knows own logic)</td>
+                            <td>✅ Contract's internal formulas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Execution</strong></td>
+                            <td>✅ Auditor's proprietary rules</td>
+                            <td>✅ Project's business logic</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Output</strong></td>
+                            <td>❌ Nothing (Project sees score)</td>
+                            <td>✅ Detailed risk breakdown</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-card">
+                <h2>Ready for Your First Invisible Audit?</h2>
+                <p>Join 500+ projects that trust our privacy-preserving audit layer</p>
+                <a href="audit.html" class="btn-primary btn-large">
+                    <i class="fas fa-shield-check"></i> Start Secure Audit
+                </a>
+                <div class="cta-partners">
+                    <span>Trusted by:</span>
+                    <div class="partner-logos">
+                        <span>Uniswap V4</span>
+                        <span>AAVE</span>
+                        <span>zkSync</span>
+                        <span>Polygon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>InvisibleAudit</span>
+                    </div>
+                    <p class="footer-description">
+                        World's first privacy-preserving audit layer for Web3, powered by FHE.
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="audit.html">Smart Contract Audit</a>
+                    <a href="badges.html">Audit Badges</a>
+                    <a href="#">API Documentation</a>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <a href="#">About Us</a>
+                    <a href="#">Security</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Contact</a>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                    <a href="#">GDPR</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2024 Invisible Audit Layer. All rights reserved. Built with FHE.</p>
+                <div class="tech-badges">
+                    <span class="tech-badge">FHEVM</span>
+                    <span class="tech-badge">Zero-Knowledge</span>
+                    <span class="tech-badge">Ethereum</span>
+                    <span class="tech-badge">Polygon</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay">
+        <div class="mobile-nav-content">
+            <button class="close-mobile-nav"><i class="fas fa-times"></i></button>
+            <div class="mobile-nav-links">
+                <a href="index.html" class="mobile-nav-link active"><i class="fas fa-home"></i> Home</a>
+                <a href="dashboard.html" class="mobile-nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="audit.html" class="mobile-nav-link"><i class="fas fa-search"></i> Audit</a>
+                <a href="badges.html" class="mobile-nav-link"><i class="fas fa-award"></i> Badges</a>
+                <a href="profile.html" class="mobile-nav-link"><i class="fas fa-user"></i> Profile</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="demo.js"></script>
+</body>
+</html>
