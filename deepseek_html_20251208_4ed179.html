@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | Invisible Audit Layer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>InvisibleAudit</span>
+            </a>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                <a href="dashboard.html" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="audit.html" class="nav-link"><i class="fas fa-search"></i> Audit</a>
+                <a href="badges.html" class="nav-link"><i class="fas fa-award"></i> Badges</a>
+                <a href="profile.html" class="nav-link active"><i class="fas fa-user"></i> Profile</a>
+            </div>
+            <button class="connect-wallet-btn">
+                <i class="fas fa-plug"></i> Connect Wallet
+            </button>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="page-header">
+            <h1>Profile Settings</h1>
+            <p>Manage your account and preferences</p>
+        </div>
+
+        <div class="profile-container">
+            <div class="profile-sidebar">
+                <div class="profile-card">
+                    <div class="profile-avatar">
+                        <div class="avatar-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div class="avatar-status online"></div>
+                    </div>
+                    <div class="profile-info">
+                        <h2 id="userName">Anonymous User</h2>
+                        <p class="wallet-address" id="walletAddress">Not connected</p>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <div class="stat-value" id="totalAudits">0</div>
+                                <div class="stat-label">Audits</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value" id="totalBadges">0</div>
+                                <div class="stat-label">Badges</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">2</div>
+                                <div class="stat-label">Months</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-nav">
+                    <button class="sidebar-link active" onclick="showSection('account')">
+                        <i class="fas fa-user-cog"></i> Account
+                    </button>
+                    <button class="sidebar-link" onclick="showSection('security')">
+                        <i class="fas fa-shield-alt"></i> Security
+                    </button>
+                    <button class="sidebar-link" onclick="showSection('privacy')">
+                        <i class="fas fa-eye-slash"></i> Privacy
+                    </button>
+                    <button class="sidebar-link" onclick="showSection('notifications')">
+                        <i class="fas fa-bell"></i> Notifications
+                    </button>
+                    <button class="sidebar-link" onclick="showSection('billing')">
+                        <i class="fas fa-credit-card"></i> Billing
+                    </button>
+                    <button class="sidebar-link" onclick="showSection('api')">
+                        <i class="fas fa-code"></i> API Access
+                    </button>
+                </div>
+            </div>
+            
+            <div class="profile-content">
+                <!-- Account Section -->
+                <div class="profile-section active" id="accountSection">
+                    <h2><i class="fas fa-user-cog"></i> Account Settings</h2>
+                    
+                    <div class="form-container">
+                        <div class="form-group">
+                            <label for="profileName">
+                                <i class="fas fa-user"></i> Display Name
+                            </label>
+                            <input type="text" id="profileName" placeholder="Enter your name" value="Anonymous User">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="profileEmail">
+                                <i class="fas fa-envelope"></i> Email Address
+                            </label>
+                            <input type="email" id="profileEmail" placeholder="your@email.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="profileBio">
+                                <i class="fas fa-edit"></i> Bio
+                            </label>
+                            <textarea id="profileBio" rows="4" placeholder="Tell us about yourself...">Smart contract developer focused on privacy and security</textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="profileCompany">
+                                <i class="fas fa-building"></i> Company/Organization
+                            </label>
+                            <input type="text" id="profileCompany" placeholder="Your company name">
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button class="btn-secondary" onclick="resetForm()">
+                                <i class="fas fa-undo"></i> Reset
+                            </button>
+                            <button class="btn-primary" onclick="saveProfile()">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Security Section -->
+                <div class="profile-section" id="securitySection">
+                    <h2><i class="fas fa-shield-alt"></i> Security Settings</h2>
+                    
+                    <div class="security-features">
+                        <div class="security-card">
+                            <div class="security-header">
+                                <h3><i class="fas fa-key"></i> Wallet Connection</h3>
+                                <div class="security-status connected" id="walletStatus">
+                                    <i class="fas fa-check-circle"></i> Connected
+                                </div>
+                            </div>
+                            <p>Manage your wallet connections and permissions</p>
+                            <button class="btn-small" onclick="manageWallet()">
+                                <i class="fas fa-cog"></i> Manage Wallet
+                            </button>
+                        </div>
+                        
+                        <div class="security-card">
+                            <div class="security-header">
+                                <h3><i class="fas fa-fingerprint"></i> 2FA Authentication</h3>
+                                <div class="security-status disabled">
+                                    <i class="fas fa-times-circle"></i> Disabled
+                                </div>
+                            </div>
+                            <p>Add an extra layer of security to your account</p>
+                            <button class="btn-small" onclick="enable2FA()">
+                                <i class="fas fa-plus-circle"></i> Enable 2FA
+                            </button>
+                        </div>
+                        
+                        <div class="security-card">
+                            <div class="security-header">
+                                <h3><i class="fas fa-history"></i> Session Management</h3>
+                                <div class="security-status">
+                                    <i class="fas fa-info-circle"></i> 1 Active
+                                </div>
+                            </div>
+                            <p>View and manage your active sessions</p>
+                            <button class="btn-small" onclick="viewSessions()">
+                                <i class="fas fa-desktop"></i> View Sessions
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="security-actions">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Dangerous Zone</h3>
+                        <div class="danger-actions">
+                            <button class="btn-danger" onclick="exportData()">
+                                <i class="fas fa-download"></i> Export All Data
+                            </button>
+                            <button class="btn-danger" onclick="deleteAccount()">
+                                <i class="fas fa-trash"></i> Delete Account
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Privacy Section -->
+                <div class="profile-section" id="privacySection">
+                    <h2><i class="fas fa-eye-slash"></i> Privacy Settings</h2>
+                    
+                    <div class="privacy-options">
+                        <div class="privacy-option">
+                            <label class="toggle-label">
+                                <input type="checkbox" id="hideAuditScores" checked>
+                                <span class="toggle-slider"></span>
+                                <span class="toggle-text">Hide audit scores from public</span>
+                            </label>
+                            <p class="option-description">Only show that audit was completed, not the score</p>
+                        </div>
+                        
+                        <div class="privacy-option">
+                            <label class="toggle-label">
+                                <input type="checkbox" id="anonymousBadges" checked>
+                                <span class="toggle-slider"></span>
+                                <span class="toggle-text">Anonymous badge minting</span>
+                            </label>
+                            <p class="option-description">Mint badges without revealing your identity</p>
+                        </div>
+                        
+                        <div class="privacy-option">
+                            <label class="toggle-label">
+                                <input type="checkbox" id="hideFromAuditors">
+                                <span class="toggle-slider"></span>
+                                <span class="toggle-text">Hide from auditor networks</span>
+                            </label>
+                            <p class="option-description">Prevent auditors from seeing your audit history</p>
+                        </div>
+                        
+                        <div class="privacy-option">
+                            <label class="toggle-label">
+                                <input type="checkbox" id="dataEncryption" checked>
+                                <span class="toggle-slider"></span>
+                                <span class="toggle-text">End-to-end encryption</span>
+                            </label>
+                            <p class="option-description">Encrypt all your data including audit history</p>
+                        </div>
+                    </div>
+                    
+                    <div class="data-retention">
+                        <h3><i class="fas fa-database"></i> Data Retention</h3>
+                        <p>Choose how long we keep your audit data</p>
+                        <div class="retention-options">
+                            <label class="radio-label">
+                                <input type="radio" name="retention" value="30" checked>
+                                <span class="radio-text">30 days (Recommended)</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="retention" value="90">
+                                <span class="radio-text">90 days</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="retention" value="365">
+                                <span class="radio-text">1 year</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="retention" value="forever">
+                                <span class="radio-text">Indefinitely</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Notifications Section -->
+                <div class="profile-section" id="notificationsSection">
+                    <h2><i class="fas fa-bell"></i> Notification Settings</h2>
+                    
+                    <div class="notification-categories">
+                        <div class="notification-category">
+                            <h3><i class="fas fa-search"></i> Audit Notifications</h3>
+                            <div class="notification-options">
+                                <label class="toggle-label">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-text">Audit completion alerts</span>
+                                </label>
+                                <label class="toggle-label">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-text">High risk alerts</span>
+                                </label>
+                                <label class="toggle-label">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-text">New auditor available</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-category">
+                            <h3><i class="fas fa-award"></i> Badge Notifications</h3>
+                            <div class="notification-options">
+                                <label class="toggle-label">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-text">Badge minting success</span>
+                                </label>
+                                <label class="toggle-label">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-text">Badge sharing alerts</span>
+                                </label>
+                                <label class="toggle-label">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-text">Badge verification requests</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-category">
+                            <h3><i class="fas fa-envelope"></i> Email Notifications</h3>
+                            <div class="notification-options">
+                                <label class="toggle-label">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-text">Weekly summary</span>
+                                </label>
+                                <label class="toggle-label">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-text">Product updates</span>
+                                </label>
+                                <label class="toggle-label">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-text">Marketing emails</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Billing Section -->
+                <div class="profile-section" id="billingSection">
+                    <h2><i class="fas fa-credit-card"></i> Billing & Subscription</h2>
+                    
+                    <div class="subscription-card">
+                        <div class="subscription-header">
+                            <h3><i class="fas fa-crown"></i> Current Plan: Free Tier</h3>
+                            <div class="plan-status active">Active</div>
+                        </div>
+                        
+                        <div class="plan-features">
+                            <div class="feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>3 Audits per month</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Basic risk analysis</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Standard encryption</span>
+                            </div>
+                            <div class="feature disabled">
+                                <i class="fas fa-times-circle"></i>
+                                <span>Advanced vulnerability detection</span>
+                            </div>
+                            <div class="feature disabled">
+                                <i class="fas fa-times-circle"></i>
+                                <span>Priority support</span>
+                            </div>
+                        </div>
+                        
+                        <div class="upgrade-options">
+                            <h3>Upgrade Your Plan</h3>
+                            <div class="plans-grid">
+                                <div class="plan-option">
+                                    <h4>Pro</h4>
+                                    <div class="plan-price">$99<span>/month</span></div>
+                                    <ul class="plan-benefits">
+                                        <li>Unlimited audits</li>
+                                        <li>Advanced FHE encryption</li>
+                                        <li>Priority processing</li>
+                                        <li>Email support</li>
+                                    </ul>
+                                    <button class="btn-small">Upgrade</button>
+                                </div>
+                                
+                                <div class="plan-option featured">
+                                    <h4>Enterprise</h4>
+                                    <div class="plan-price">$499<span>/month</span></div>
+                                    <ul class="plan-benefits">
+                                        <li>Everything in Pro</li>
+                                        <li>Custom audit rules</li>
+                                        <li>API access</li>
+                                        <li>24/7 phone support</li>
+                                        <li>SLA guarantee</li>
+                                    </ul>
+                                    <button class="btn-primary">Contact Sales</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- API Section -->
+                <div class="profile-section" id="apiSection">
+                    <h2><i class="fas fa-code"></i> API Access</h2>
+                    
+                    <div class="api-info">
+                        <div class="api-card">
+                            <div class="api-header">
+                                <h3><i class="fas fa-key"></i> API Keys</h3>
+                                <button class="btn-small" onclick="generateApiKey()">
+                                    <i class="fas fa-plus"></i> Generate New Key
+                                </button>
+                            </div>
+                            
+                            <div class="api-keys-list">
+                                <div class="api-key-item">
+                                    <div class="key-info">
+                                        <div class="key-name">Production Key</div>
+                                        <div class="key-value">
+                                            <code>sk_live_742d35cc6634c0532925a3b</code>
+                                        </div>
+                                        <div class="key-meta">
+                                            <span>Created: 2024-01-15</span>
+                                            <span>Last used: Today</span>
+                                            <span>Requests: 1,247</span>
+                                        </div>
+                                    </div>
+                                    <div class="key-actions">
+                                        <button class="key-action" onclick="copyApiKey()">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                        <button class="key-action" onclick="revokeApiKey()">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="api-docs">
+                            <h3><i class="fas fa-book"></i> API Documentation</h3>
+                            <div class="code-example">
+                                <pre><code>// Submit encrypted audit
+POST https://api.invisibleaudit.io/v1/audit
+Authorization: Bearer sk_live_...
+Content-Type: application/json
+
+{
+  "contract_type": "amm",
+  "encrypted_params": "0x7b2276657273696f6e...",
+  "auditor_id": "zama_fhe"
+}</code></pre>
+                            </div>
+                            
+                            <div class="docs-links">
+                                <a href="#" class="docs-link">
+                                    <i class="fas fa-file-code"></i> Full API Reference
+                                </a>
+                                <a href="#" class="docs-link">
+                                    <i class="fas fa-download"></i> SDK Downloads
+                                </a>
+                                <a href="#" class="docs-link">
+                                    <i class="fas fa-question-circle"></i> Support
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>© 2024 Invisible Audit Layer. All rights reserved. Built with FHE.</p>
+                <div class="tech-badges">
+                    <span class="tech-badge">FHEVM</span>
+                    <span class="tech-badge">Zero-Knowledge</span>
+                    <span class="tech-badge">Ethereum</span>
+                    <span class="tech-badge">Polygon</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="mobile-nav-overlay">
+        <div class="mobile-nav-content">
+            <button class="close-mobile-nav"><i class="fas fa-times"></i></button>
+            <div class="mobile-nav-links">
+                <a href="index.html" class="mobile-nav-link"><i class="fas fa-home"></i> Home</a>
+                <a href="dashboard.html" class="mobile-nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="audit.html" class="mobile-nav-link"><i class="fas fa-search"></i> Audit</a>
+                <a href="badges.html" class="mobile-nav-link"><i class="fas fa-award"></i> Badges</a>
+                <a href="profile.html" class="mobile-nav-link active"><i class="fas fa-user"></i> Profile</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="demo.js"></script>
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.profile-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all sidebar links
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId + 'Section').classList.add('active');
+            
+            // Set active sidebar link
+            event.target.classList.add('active');
+        }
+        
+        function updateProfileStats() {
+            const badges = JSON.parse(localStorage.getItem('auditBadges') || '[]');
+            const audits = demoSystem.audits || [];
+            
+            document.getElementById('totalAudits').textContent = audits.length;
+            document.getElementById('totalBadges').textContent = badges.length;
+            
+            // Update wallet address if connected
+            if (demoSystem.currentUser) {
+                document.getElementById('walletAddress').textContent = 
+                    demoSystem.currentUser.substring(0, 10) + '...' + 
+                    demoSystem.currentUser.substring(demoSystem.currentUser.length - 4);
+                document.getElementById('walletStatus').innerHTML = 
+                    '<i class="fas fa-check-circle"></i> Connected';
+            }
+        }
+        
+        function saveProfile() {
+            const name = document.getElementById('profileName').value;
+            const email = document.getElementById('profileEmail').value;
+            
+            document.getElementById('userName').textContent = name || 'Anonymous User';
+            
+            demoSystem.showNotification('Profile saved successfully!', 'success');
+            
+            // Save to localStorage
+            localStorage.setItem('userProfile', JSON.stringify({
+                name: name,
+                email: email,
+                bio: document.getElementById('profileBio').value,
+                company: document.getElementById('profileCompany').value
+            }));
+        }
+        
+        function resetForm() {
+            document.getElementById('profileName').value = 'Anonymous User';
+            document.getElementById('profileEmail').value = '';
+            document.getElementById('profileBio').value = 'Smart contract developer focused on privacy and security';
+            document.getElementById('profileCompany').value = '';
+            
+            demoSystem.showNotification('Form reset to defaults', 'info');
+        }
+        
+        function manageWallet() {
+            demoSystem.simulateWalletConnect();
+            updateProfileStats();
+        }
+        
+        function enable2FA() {
+            demoSystem.showNotification('2FA setup initiated. Check your email.', 'info');
+        }
+        
+        function viewSessions() {
+            demoSystem.showNotification('Active sessions: 1 (Current device)', 'info');
+        }
+        
+        function exportData() {
+            demoSystem.showNotification('Data export started. You will receive an email shortly.', 'info');
+        }
+        
+        function deleteAccount() {
+            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                demoSystem.showNotification('Account deletion scheduled. Contact support to cancel within 24 hours.', 'warning');
+            }
+        }
+        
+        function generateApiKey() {
+            const key = 'sk_live_' + Math.random().toString(36).substring(2) + Math.random().toString(36).substring(2);
+            demoSystem.showNotification('New API key generated: ' + key.substring(0, 20) + '...', 'success');
+        }
+        
+        function copyApiKey() {
+            navigator.clipboard.writeText('sk_live_742d35cc6634c0532925a3b');
+            demoSystem.showNotification('API key copied to clipboard!', 'success');
+        }
+        
+        function revokeApiKey() {
+            if (confirm('Are you sure you want to revoke this API key?')) {
+                demoSystem.showNotification('API key revoked successfully', 'success');
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProfileStats();
+            
+            // Load saved profile
+            const savedProfile = JSON.parse(localStorage.getItem('userProfile') || '{}');
+            if (savedProfile.name) {
+                document.getElementById('profileName').value = savedProfile.name;
+                document.getElementById('userName').textContent = savedProfile.name;
+            }
+            if (savedProfile.email) document.getElementById('profileEmail').value = savedProfile.email;
+            if (savedProfile.bio) document.getElementById('profileBio').value = savedProfile.bio;
+            if (savedProfile.company) document.getElementById('profileCompany').value = savedProfile.company;
+        });
+    </script>
+    
+    <style>
+        .profile-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        @media (min-width: 1024px) {
+            .profile-container {
+                grid-template-columns: 300px 1fr;
+            }
+        }
+        
+        .profile-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .profile-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        .profile-avatar {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .avatar-icon {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .avatar-status {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 20px;
+            height: 20px;
+            border: 3px solid white;
+            border-radius: 50%;
+        }
+        
+        .avatar-status.online {
+            background: var(--secondary);
+        }
+        
+        .profile-info h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .wallet-address {
+            font-family: monospace;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            word-break: break-all;
+        }
+        
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .sidebar-nav {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: none;
+            background: none;
+            text-align: left;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            color: var(--dark);
+            cursor: pointer;
+            transition: var(--transition);
+            border-left: 4px solid transparent;
+        }
+        
+        .sidebar-link:hover {
+            background: var(--light);
+        }
+        
+        .sidebar-link.active {
+            background: rgba(99, 102, 241, 0.1);
+            border-left-color: var(--primary);
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .sidebar-link i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        .profile-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .profile-section {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .profile-section.active {
+            display: block;
+        }
+        
+        .profile-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--gray-light);
+        }
+        
+        .security-features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .security-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .security-features {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .security-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .security-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .security-header h3 {
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .security-status {
+            font-size: 0.8rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+        
+        .security-status.connected {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .security-status.disabled {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .security-card p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+        
+        .security-actions {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .danger-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .btn-danger {
+            padding: 12px 24px;
+            background: #fee2e2;
+            color: #dc2626;
+            border: 2px solid #fca5a5;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-danger:hover {
+            background: #fecaca;
+            border-color: #ef4444;
+        }
+        
+        .privacy-options {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .privacy-option {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .privacy-option:last-child {
+            border-bottom: none;
+        }
+        
+        .toggle-label {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+        }
+        
+        .toggle-label input {
+            display: none;
+        }
+        
+        .toggle-slider {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            background: var(--gray-light);
+            border-radius: 13px;
+            transition: var(--transition);
+        }
+        
+        .toggle-slider::before {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: var(--transition);
+        }
+        
+        input:checked + .toggle-slider {
+            background: var(--primary);
+        }
+        
+        input:checked + .toggle-slider::before {
+            transform: translateX(24px);
+        }
+        
+        .toggle-text {
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .option-description {
+            margin-left: 60px;
+            margin-top: 0.5rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .data-retention {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .data-retention h3 {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .data-retention p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        .retention-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+        }
+        
+        .radio-label input {
+            width: auto;
+        }
+        
+        .notification-categories {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .notification-category {
+            margin-bottom: 2rem;
+        }
+        
+        .notification-category:last-child {
+            margin-bottom: 0;
+        }
+        
+        .notification-category h3 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .notification-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-left: 1.5rem;
+        }
+        
+        .subscription-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .subscription-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .subscription-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .plan-status {
+            padding: 6px 12px;
+            background: #d1fae5;
+            color: #065f46;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .plan-features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+        
+        @media (min-width: 480px) {
+            .plan-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .feature.disabled {
+            opacity: 0.5;
+        }
+        
+        .feature i {
+            color: var(--secondary);
+        }
+        
+        .feature.disabled i {
+            color: var(--danger);
+        }
+        
+        .upgrade-options {
+            padding-top: 2rem;
+            border-top: 1px solid var(--gray-light);
+        }
+        
+        .upgrade-options h3 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .plans-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .plans-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .plan-option {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+        
+        .plan-option.featured {
+            background: white;
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+            transform: scale(1.05);
+        }
+        
+        .plan-option h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .plan-price span {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+        
+        .plan-benefits {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .plan-benefits li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .plan-benefits li:last-child {
+            border-bottom: none;
+        }
+        
+        .plan-benefits li::before {
+            content: '✓';
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        .api-info {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .api-card {
+            margin-bottom: 2rem;
+        }
+        
+        .api-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .api-keys-list {
+            border: 1px solid var(--gray-light);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .api-key-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-light);
+            transition: var(--transition);
+        }
+        
+        .api-key-item:hover {
+            background: var(--light);
+        }
+        
+        .api-key-item:last-child {
+            border-bottom: none;
+        }
+        
+        .key-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .key-value {
+            font-family: monospace;
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            word-break: break-all;
+        }
+        
+        .key-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+        
+        .key-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .key-action {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: var(--light);
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .key-action:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .api-docs h3 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .code-example {
+            background: var(--dark);
+            color: #10b981;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+        
+        .docs-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .docs-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .docs-link:hover {
+            color: var(--primary-dark);
+        }
+        
+        @media (max-width: 768px) {
+            .profile-card {
+                padding: 1.5rem;
+            }
+            
+            .form-container,
+            .security-features,
+            .security-actions,
+            .privacy-options,
+            .data-retention,
+            .notification-categories,
+            .subscription-card,
+            .api-info {
+                padding: 1.5rem;
+            }
+            
+            .security-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .plan-option.featured {
+                transform: none;
+            }
+            
+            .key-meta {
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .danger-actions {
+                flex-direction: column;
+            }
+            
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>
