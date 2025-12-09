@@ -4,162 +4,365 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Audit | Invisible Audit Layer</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-audit.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <i class="fas fa-shield-alt"></i>
-                <span>InvisibleAudit</span>
-            </a>
-            <div class="nav-menu">
-                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
-                <a href="dashboard.html" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                <a href="audit.html" class="nav-link active"><i class="fas fa-search"></i> Audit</a>
-                <a href="badges.html" class="nav-link"><i class="fas fa-award"></i> Badges</a>
-                <a href="profile.html" class="nav-link"><i class="fas fa-user"></i> Profile</a>
-            </div>
-            <button class="connect-wallet-btn">
-                <i class="fas fa-plug"></i> Connect Wallet
-            </button>
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-    </nav>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
 
-    <main class="container">
-        <div class="page-header">
-            <h1>Submit Audit Request</h1>
-            <p>Configure your contract parameters for privacy-preserving audit</p>
-        </div>
-
-        <div class="audit-wizard">
-            <!-- Step 1: Contract Details -->
-            <div class="wizard-step active" id="step1">
-                <div class="step-header">
-                    <div class="step-number">1</div>
-                    <div class="step-info">
-                        <h2>Contract Configuration</h2>
-                        <p>Enter your contract parameters (will be encrypted)</p>
-                    </div>
+    <!-- Header -->
+    <header class="header" data-aos="fade-down">
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-shield-alt"></i>
                 </div>
-                
-                <div class="form-container">
-                    <div class="form-group">
-                        <label for="contractName">
-                            <i class="fas fa-file-contract"></i> Contract Name
-                        </label>
-                        <input type="text" id="contractName" placeholder="e.g., Uniswap V4 Pool" value="My AMM Contract">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="contractType">
-                            <i class="fas fa-cubes"></i> Contract Type
-                        </label>
-                        <select id="contractType">
-                            <option value="amm">AMM/DEX</option>
-                            <option value="lending">Lending Protocol</option>
-                            <option value="derivatives">Derivatives</option>
-                            <option value="bridge">Cross-chain Bridge</option>
-                            <option value="yield">Yield Aggregator</option>
-                            <option value="nft">NFT Marketplace</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="feeRate">
-                                <i class="fas fa-percentage"></i> Fee Rate (bps)
-                                <span class="hint">0.01% = 1 bps</span>
-                            </label>
-                            <input type="number" id="feeRate" value="30" min="0" max="1000" step="1">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="maxLeverage">
-                                <i class="fas fa-chart-line"></i> Max Leverage
-                            </label>
-                            <input type="number" id="maxLeverage" value="10" min="1" max="1000" step="1">
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="oracleDelay">
-                                <i class="fas fa-clock"></i> Oracle Update Delay (seconds)
-                            </label>
-                            <input type="number" id="oracleDelay" value="45" min="1" max="3600" step="1">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="poolDepth">
-                                <i class="fas fa-water"></i> Pool Depth (USD)
-                            </label>
-                            <input type="number" id="poolDepth" value="120000" min="0" step="1000">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="additionalParams">
-                            <i class="fas fa-code"></i> Additional Parameters (JSON)
-                        </label>
-                        <textarea id="additionalParams" rows="4" placeholder='{"slippageTolerance": 50, "maxPositionSize": 10000}'>{"slippageTolerance": 50, "maxPositionSize": 10000, "withdrawalDelay": 3600}</textarea>
-                    </div>
-                </div>
-                
-                <div class="step-actions">
-                    <button class="btn-primary" onclick="nextStep()">
-                        Next: Encryption <i class="fas fa-arrow-right"></i>
-                    </button>
+                <div class="logo-text">
+                    <span class="logo-primary">INVISIBLE</span>
+                    <span class="logo-secondary">AUDIT</span>
                 </div>
             </div>
             
-            <!-- Step 2: Encryption -->
-            <div class="wizard-step" id="step2">
-                <div class="step-header">
-                    <div class="step-number">2</div>
-                    <div class="step-info">
-                        <h2>Encryption & Privacy</h2>
-                        <p>Configure encryption settings for dual-sided privacy</p>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-chart-network"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="audit.html" class="nav-link active">
+                    <i class="fas fa-search-shield"></i>
+                    <span>Audit</span>
+                </a>
+                <a href="badges.html" class="nav-link">
+                    <i class="fas fa-award"></i>
+                    <span>Badges</span>
+                </a>
+                <a href="profile.html" class="nav-link">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Profile</span>
+                </a>
+            </nav>
+            
+            <div class="header-actions">
+                <button class="wallet-btn" id="connectWalletBtn">
+                    <i class="fas fa-wallet"></i>
+                    <span id="walletText">Connect Wallet</span>
+                </button>
+                <button class="menu-btn" id="menuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" data-aos="fade-up">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">Privacy-Preserving</span>
+                    <br>Smart Contract Audit
+                </h1>
+                <p class="hero-subtitle">
+                    Submit your smart contract for encrypted analysis. Zero knowledge, maximum security.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="stat-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">100%</div>
+                            <div class="stat-label">Encrypted</div>
+                        </div>
                     </div>
+                    
+                    <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="stat-icon">
+                            <i class="fas fa-eye-slash"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">0 KB</div>
+                            <div class="stat-label">Data Leaked</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="stat-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">2.4h</div>
+                            <div class="stat-label">Avg. Time</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-visual" data-aos="zoom-in-left">
+                <div class="visual-card">
+                    <div class="visual-header">
+                        <h3>How It Works</h3>
+                    </div>
+                    <div class="process-steps">
+                        <div class="process-step active">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Encrypt Contract</h4>
+                                <p>Your parameters are encrypted using FHE</p>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Blind Analysis</h4>
+                                <p>Auditor analyzes without seeing your logic</p>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Get Results</h4>
+                                <p>Receive encrypted risk score</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content - Audit Wizard -->
+    <main class="audit-main">
+        <!-- Step 1: Contract Details -->
+        <section class="audit-section active" id="step1">
+            <div class="section-container" data-aos="fade-up">
+                <div class="section-header">
+                    <div class="step-indicator">
+                        <div class="step active">1</div>
+                        <div class="step-line"></div>
+                        <div class="step">2</div>
+                        <div class="step-line"></div>
+                        <div class="step">3</div>
+                    </div>
+                    <h2>Contract Details</h2>
+                    <p class="section-subtitle">Enter your smart contract configuration (will be encrypted)</p>
+                </div>
+                
+                <div class="audit-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contractName">
+                                <i class="fas fa-file-contract"></i>
+                                Contract Name
+                            </label>
+                            <input type="text" id="contractName" placeholder="e.g., Uniswap V4 Pool" value="My AMM Contract">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contractType">
+                                <i class="fas fa-cubes"></i>
+                                Contract Type
+                            </label>
+                            <select id="contractType">
+                                <option value="amm">AMM/DEX</option>
+                                <option value="lending">Lending Protocol</option>
+                                <option value="derivatives">Derivatives</option>
+                                <option value="bridge">Cross-chain Bridge</option>
+                                <option value="yield">Yield Aggregator</option>
+                                <option value="nft">NFT Marketplace</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contractAddress">
+                                <i class="fas fa-hashtag"></i>
+                                Contract Address (Optional)
+                            </label>
+                            <input type="text" id="contractAddress" placeholder="0x...">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="network">
+                                <i class="fas fa-network-wired"></i>
+                                Network
+                            </label>
+                            <select id="network">
+                                <option value="ethereum">Ethereum</option>
+                                <option value="polygon">Polygon</option>
+                                <option value="arbitrum">Arbitrum</option>
+                                <option value="optimism">Optimism</option>
+                                <option value="base">Base</option>
+                                <option value="solana">Solana</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3><i class="fas fa-sliders-h"></i> Contract Parameters</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="feeRate">
+                                    <i class="fas fa-percentage"></i>
+                                    Fee Rate (bps)
+                                    <span class="hint">0.01% = 1 bps</span>
+                                </label>
+                                <div class="input-with-slider">
+                                    <input type="range" id="feeRateSlider" min="0" max="1000" value="30">
+                                    <input type="number" id="feeRate" value="30" min="0" max="1000">
+                                    <span class="unit">bps</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="maxLeverage">
+                                    <i class="fas fa-chart-line"></i>
+                                    Max Leverage
+                                </label>
+                                <div class="input-with-slider">
+                                    <input type="range" id="leverageSlider" min="1" max="100" value="10">
+                                    <input type="number" id="maxLeverage" value="10" min="1" max="100">
+                                    <span class="unit">x</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="oracleDelay">
+                                    <i class="fas fa-clock"></i>
+                                    Oracle Update Delay
+                                </label>
+                                <div class="input-with-slider">
+                                    <input type="range" id="delaySlider" min="1" max="3600" value="45">
+                                    <input type="number" id="oracleDelay" value="45" min="1" max="3600">
+                                    <span class="unit">sec</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="poolDepth">
+                                    <i class="fas fa-water"></i>
+                                    Pool Depth
+                                </label>
+                                <div class="input-with-slider">
+                                    <input type="range" id="depthSlider" min="0" max="1000000" step="1000" value="120000">
+                                    <input type="number" id="poolDepth" value="120000" min="0" max="1000000" step="1000">
+                                    <span class="unit">USD</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3><i class="fas fa-code"></i> Additional Configuration</h3>
+                        <div class="form-group">
+                            <label for="additionalParams">
+                                <i class="fas fa-cog"></i>
+                                Advanced Parameters (JSON)
+                            </label>
+                            <div class="code-editor">
+                                <div class="editor-header">
+                                    <div class="editor-tabs">
+                                        <button class="editor-tab active">config.json</button>
+                                    </div>
+                                    <button class="editor-action" id="formatJsonBtn">
+                                        <i class="fas fa-broom"></i> Format
+                                    </button>
+                                </div>
+                                <textarea id="additionalParams" class="code-input">{
+  "slippageTolerance": 50,
+  "maxPositionSize": 10000,
+  "withdrawalDelay": 3600,
+  "emergencyPause": true,
+  "governanceDelay": 86400
+}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button class="btn-outline" id="resetFormBtn">
+                            <i class="fas fa-redo"></i> Reset Form
+                        </button>
+                        <button class="btn-primary" id="nextStep1Btn">
+                            Continue to Encryption <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 2: Encryption Settings -->
+        <section class="audit-section" id="step2">
+            <div class="section-container" data-aos="fade-up">
+                <div class="section-header">
+                    <div class="step-indicator">
+                        <div class="step completed">✓</div>
+                        <div class="step-line active"></div>
+                        <div class="step active">2</div>
+                        <div class="step-line"></div>
+                        <div class="step">3</div>
+                    </div>
+                    <h2>Encryption & Privacy</h2>
+                    <p class="section-subtitle">Configure FHE encryption settings for dual-sided privacy</p>
                 </div>
                 
                 <div class="encryption-visual">
                     <div class="encryption-flow">
-                        <div class="flow-item">
+                        <div class="flow-item" data-aos="fade-right">
                             <div class="flow-icon">
-                                <i class="fas fa-lock"></i>
+                                <i class="fas fa-user-shield"></i>
                             </div>
-                            <div class="flow-text">Your Contract</div>
-                            <div class="flow-status">🔒 Encrypted</div>
+                            <div class="flow-content">
+                                <h4>Your Contract</h4>
+                                <p>Business logic stays hidden</p>
+                            </div>
+                            <div class="flow-status encrypted">🔒 Encrypted</div>
                         </div>
                         
-                        <div class="flow-arrow">
+                        <div class="flow-arrow" data-aos="zoom-in">
                             <i class="fas fa-arrow-right"></i>
                         </div>
                         
-                        <div class="flow-item">
+                        <div class="flow-item" data-aos="zoom-in">
                             <div class="flow-icon">
                                 <i class="fas fa-eye-slash"></i>
                             </div>
-                            <div class="flow-text">Audit Engine</div>
-                            <div class="flow-status">👁️‍🗨️ Blind Analysis</div>
+                            <div class="flow-content">
+                                <h4>Audit Engine</h4>
+                                <p>Blind analysis in FHEVM</p>
+                            </div>
+                            <div class="flow-status invisible">👁️‍🗨️ Invisible</div>
                         </div>
                         
-                        <div class="flow-arrow">
+                        <div class="flow-arrow" data-aos="zoom-in">
                             <i class="fas fa-arrow-right"></i>
                         </div>
                         
-                        <div class="flow-item">
+                        <div class="flow-item" data-aos="fade-left">
                             <div class="flow-icon">
                                 <i class="fas fa-shield-check"></i>
                             </div>
-                            <div class="flow-text">Results</div>
-                            <div class="flow-status">🔐 Encrypted Output</div>
+                            <div class="flow-content">
+                                <h4>Results</h4>
+                                <p>Only you can decrypt</p>
+                            </div>
+                            <div class="flow-status secure">🔐 Secure</div>
                         </div>
                     </div>
                 </div>
@@ -167,99 +370,309 @@
                 <div class="privacy-settings">
                     <h3><i class="fas fa-user-secret"></i> Privacy Settings</h3>
                     
-                    <div class="privacy-option">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="hideLogic" checked>
-                            <span class="checkmark"></span>
-                            Hide business logic from auditor
-                        </label>
-                        <p class="option-description">Auditor will analyze without seeing your formulas</p>
-                    </div>
-                    
-                    <div class="privacy-option">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="hideRules" checked>
-                            <span class="checkmark"></span>
-                            Hide audit rules from you
-                        </label>
-                        <p class="option-description">You won't see the vulnerability detection algorithms</p>
-                    </div>
-                    
-                    <div class="privacy-option">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="anonymousAudit" checked>
-                            <span class="checkmark"></span>
-                            Anonymous audit submission
-                        </label>
-                        <p class="option-description">Auditor won't know who submitted the contract</p>
+                    <div class="settings-grid">
+                        <div class="setting-card" data-aos="flip-up">
+                            <div class="setting-header">
+                                <div class="setting-icon">
+                                    <i class="fas fa-eye-slash"></i>
+                                </div>
+                                <h4>Hide Business Logic</h4>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="hideLogic" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="setting-description">
+                                Auditor analyzes without seeing your formulas and algorithms
+                            </p>
+                        </div>
+                        
+                        <div class="setting-card" data-aos="flip-up" data-aos-delay="100">
+                            <div class="setting-header">
+                                <div class="setting-icon">
+                                    <i class="fas fa-mask"></i>
+                                </div>
+                                <h4>Hide Audit Rules</h4>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="hideRules" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="setting-description">
+                                You won't see the vulnerability detection algorithms used
+                            </p>
+                        </div>
+                        
+                        <div class="setting-card" data-aos="flip-up" data-aos-delay="200">
+                            <div class="setting-header">
+                                <div class="setting-icon">
+                                    <i class="fas fa-user-ninja"></i>
+                                </div>
+                                <h4>Anonymous Submission</h4>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="anonymousAudit" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="setting-description">
+                                Auditor won't know who submitted the contract
+                            </p>
+                        </div>
+                        
+                        <div class="setting-card" data-aos="flip-up" data-aos-delay="300">
+                            <div class="setting-header">
+                                <div class="setting-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <h4>End-to-End Encryption</h4>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="e2eEncryption" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="setting-description">
+                                Encrypt all data including audit history and results
+                            </p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="step-actions">
-                    <button class="btn-secondary" onclick="prevStep()">
+                <div class="auditor-selection">
+                    <h3><i class="fas fa-user-tie"></i> Select Auditor</h3>
+                    <p>Choose from our network of certified privacy-preserving auditors</p>
+                    
+                    <div class="auditor-grid">
+                        <div class="auditor-card" data-aos="zoom-in">
+                            <div class="auditor-header">
+                                <div class="auditor-avatar">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="auditor-info">
+                                    <h4>Zama Security</h4>
+                                    <div class="auditor-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <span>4.8</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="auditor-stats">
+                                <div class="stat">
+                                    <div class="stat-value">1,247</div>
+                                    <div class="stat-label">Audits</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">99.7%</div>
+                                    <div class="stat-label">Score</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">2.1h</div>
+                                    <div class="stat-label">Avg. Time</div>
+                                </div>
+                            </div>
+                            <div class="auditor-tags">
+                                <span class="tag fhe">FHE Expert</span>
+                                <span class="tag amm">AMM Specialist</span>
+                            </div>
+                            <button class="auditor-select-btn" data-auditor="zama">
+                                <i class="fas fa-check"></i> Select
+                            </button>
+                        </div>
+                        
+                        <div class="auditor-card" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="auditor-header">
+                                <div class="auditor-avatar">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="auditor-info">
+                                    <h4>Zero-Knowledge Labs</h4>
+                                    <div class="auditor-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>5.0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="auditor-stats">
+                                <div class="stat">
+                                    <div class="stat-value">892</div>
+                                    <div class="stat-label">Audits</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">99.9%</div>
+                                    <div class="stat-label">Score</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">3.4h</div>
+                                    <div class="stat-label">Avg. Time</div>
+                                </div>
+                            </div>
+                            <div class="auditor-tags">
+                                <span class="tag zk">ZK Expert</span>
+                                <span class="tag lending">Lending</span>
+                            </div>
+                            <button class="auditor-select-btn" data-auditor="zk-labs">
+                                <i class="fas fa-check"></i> Select
+                            </button>
+                        </div>
+                        
+                        <div class="auditor-card" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="auditor-header">
+                                <div class="auditor-avatar">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <div class="auditor-info">
+                                    <h4>Fast Audit Inc.</h4>
+                                    <div class="auditor-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>4.9</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="auditor-stats">
+                                <div class="stat">
+                                    <div class="stat-value">1,542</div>
+                                    <div class="stat-label">Audits</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">98.5%</div>
+                                    <div class="stat-label">Score</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">1.2h</div>
+                                    <div class="stat-label">Avg. Time</div>
+                                </div>
+                            </div>
+                            <div class="auditor-tags">
+                                <span class="tag fast">Fast Audit</span>
+                                <span class="tag bridge">Bridge Expert</span>
+                            </div>
+                            <button class="auditor-select-btn" data-auditor="fast-audit">
+                                <i class="fas fa-check"></i> Select
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button class="btn-outline" id="backStep1Btn">
                         <i class="fas fa-arrow-left"></i> Back
                     </button>
-                    <button class="btn-primary" onclick="nextStep()">
-                        Next: Review <i class="fas fa-arrow-right"></i>
+                    <button class="btn-primary" id="nextStep2Btn">
+                        Review & Submit <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
             </div>
-            
-            <!-- Step 3: Review & Submit -->
-            <div class="wizard-step" id="step3">
-                <div class="step-header">
-                    <div class="step-number">3</div>
-                    <div class="step-info">
-                        <h2>Review & Submit</h2>
-                        <p>Confirm your audit request and submit to FHEVM</p>
+        </section>
+
+        <!-- Step 3: Review & Submit -->
+        <section class="audit-section" id="step3">
+            <div class="section-container" data-aos="fade-up">
+                <div class="section-header">
+                    <div class="step-indicator">
+                        <div class="step completed">✓</div>
+                        <div class="step-line active"></div>
+                        <div class="step completed">✓</div>
+                        <div class="step-line active"></div>
+                        <div class="step active">3</div>
                     </div>
+                    <h2>Review & Submit</h2>
+                    <p class="section-subtitle">Verify your configuration and submit for encrypted audit</p>
                 </div>
                 
-                <div class="review-summary">
-                    <div class="summary-card">
-                        <h3><i class="fas fa-file-alt"></i> Contract Summary</h3>
-                        <div class="summary-content">
-                            <div class="summary-item">
-                                <span>Name:</span>
-                                <strong id="reviewName">My AMM Contract</strong>
+                <div class="review-grid">
+                    <div class="review-card" data-aos="zoom-in">
+                        <div class="review-header">
+                            <h3><i class="fas fa-file-alt"></i> Contract Summary</h3>
+                            <button class="edit-btn" id="editContractBtn">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                        </div>
+                        <div class="review-content">
+                            <div class="review-item">
+                                <span class="label">Name:</span>
+                                <span class="value" id="reviewName">My AMM Contract</span>
                             </div>
-                            <div class="summary-item">
-                                <span>Type:</span>
-                                <strong id="reviewType">AMM/DEX</strong>
+                            <div class="review-item">
+                                <span class="label">Type:</span>
+                                <span class="value" id="reviewType">AMM/DEX</span>
                             </div>
-                            <div class="summary-item">
-                                <span>Fee Rate:</span>
-                                <strong id="reviewFee">30 bps</strong>
+                            <div class="review-item">
+                                <span class="label">Network:</span>
+                                <span class="value" id="reviewNetwork">Ethereum</span>
                             </div>
-                            <div class="summary-item">
-                                <span>Max Leverage:</span>
-                                <strong id="reviewLeverage">10x</strong>
+                            <div class="review-item">
+                                <span class="label">Fee Rate:</span>
+                                <span class="value" id="reviewFee">30 bps</span>
                             </div>
-                            <div class="summary-item">
-                                <span>Oracle Delay:</span>
-                                <strong id="reviewDelay">45 seconds</strong>
-                            </div>
-                            <div class="summary-item">
-                                <span>Pool Depth:</span>
-                                <strong id="reviewDepth">$120,000</strong>
+                            <div class="review-item">
+                                <span class="label">Max Leverage:</span>
+                                <span class="value" id="reviewLeverage">10x</span>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="summary-card">
-                        <h3><i class="fas fa-user-shield"></i> Privacy Settings</h3>
-                        <div class="summary-content">
-                            <div class="summary-item">
-                                <span>Logic Hidden:</span>
-                                <strong class="status-yes">✅ Yes</strong>
+                    <div class="review-card" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="review-header">
+                            <h3><i class="fas fa-user-secret"></i> Privacy Settings</h3>
+                            <button class="edit-btn" id="editPrivacyBtn">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                        </div>
+                        <div class="review-content">
+                            <div class="review-item">
+                                <span class="label">Logic Hidden:</span>
+                                <span class="value status-yes">✅ Yes</span>
                             </div>
-                            <div class="summary-item">
-                                <span>Rules Hidden:</span>
-                                <strong class="status-yes">✅ Yes</strong>
+                            <div class="review-item">
+                                <span class="label">Rules Hidden:</span>
+                                <span class="value status-yes">✅ Yes</span>
                             </div>
-                            <div class="summary-item">
-                                <span>Anonymous:</span>
-                                <strong class="status-yes">✅ Yes</strong>
+                            <div class="review-item">
+                                <span class="label">Anonymous:</span>
+                                <span class="value status-yes">✅ Yes</span>
+                            </div>
+                            <div class="review-item">
+                                <span class="label">E2E Encryption:</span>
+                                <span class="value status-yes">✅ Yes</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="review-card" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="review-header">
+                            <h3><i class="fas fa-user-tie"></i> Selected Auditor</h3>
+                            <button class="edit-btn" id="editAuditorBtn">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                        </div>
+                        <div class="review-content">
+                            <div class="auditor-review">
+                                <div class="auditor-avatar">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="auditor-details">
+                                    <h4 id="reviewAuditor">Zama Security</h4>
+                                    <div class="auditor-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <span>4.8</span>
+                                    </div>
+                                    <div class="auditor-tag">FHE Expert</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -267,154 +680,227 @@
                 
                 <div class="encryption-preview">
                     <h3><i class="fas fa-key"></i> Encryption Preview</h3>
-                    <div class="code-preview">
-                        <pre id="encryptedPreview">
+                    <div class="preview-card">
+                        <div class="preview-header">
+                            <div class="preview-tabs">
+                                <button class="preview-tab active" data-tab="encrypted">Encrypted Data</button>
+                                <button class="preview-tab" data-tab="publicKey">Public Key</button>
+                                <button class="preview-tab" data-tab="signature">Signature</button>
+                            </div>
+                            <button class="copy-btn" id="copyEncryptedBtn">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="preview-content">
+                            <pre class="code-preview active" id="encryptedPreview">
 // Encrypted contract parameters
 {
-  "ciphertext": "0x7b2276657273696f6e...",
-  "publicKey": "0x04a1b2c3d4...",
-  "nonce": "0x5e884898da28...",
-  "signature": "0x3045022100..."
+  "version": "fhe-1.0",
+  "ciphertext": "0x7b2276657273696f6e223a226668652d312e30222c22656e637279707465645f64617461223a225a795a3342796447463061574e686247566e644342685a3342796447463061574e686247566e644342685a3342796447463061574e686247566e644342685a3342796447463061574e686247566e644342222c2274696d657374616d70223a313731323330303030302c226e6f6e6365223a2230786162636465663031323334353637383961626364656630313233343536373839227d",
+  "timestamp": 1712300000,
+  "nonce": "0xabcdef0123456789abcdef0123456789"
 }</pre>
+                            
+                            <pre class="code-preview" id="publicKeyPreview">
+// Public key for decryption
+{
+  "public_key": "0x04b0c4e3d5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4",
+  "algorithm": "FHE-RSA-4096",
+  "curve": "secp256k1",
+  "expires": 1714900000
+}</pre>
+                            
+                            <pre class="code-preview" id="signaturePreview">
+// Digital signature
+{
+  "signature": "0x3045022100c4e3d5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1",
+  "signer": "0x742d35Cc6634C0532925a3b844Bc9eC4C3b5",
+  "timestamp": 1712300000,
+  "message": "Invisible Audit Submission"
+}</pre>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="step-actions">
-                    <button class="btn-secondary" onclick="prevStep()">
+                <div class="cost-estimate">
+                    <h3><i class="fas fa-coins"></i> Cost Estimate</h3>
+                    <div class="cost-card">
+                        <div class="cost-item">
+                            <span class="cost-label">Audit Fee:</span>
+                            <span class="cost-value">0.5 ETH</span>
+                        </div>
+                        <div class="cost-item">
+                            <span class="cost-label">FHE Computation:</span>
+                            <span class="cost-value">0.2 ETH</span>
+                        </div>
+                        <div class="cost-item">
+                            <span class="cost-label">Gas Estimate:</span>
+                            <span class="cost-value">0.03 ETH</span>
+                        </div>
+                        <div class="cost-item total">
+                            <span class="cost-label">Total:</span>
+                            <span class="cost-value">0.73 ETH</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button class="btn-outline" id="backStep2Btn">
                         <i class="fas fa-arrow-left"></i> Back
                     </button>
-                    <button class="btn-primary btn-large" onclick="submitAudit()">
+                    <button class="btn-primary btn-large" id="submitAuditBtn">
                         <i class="fas fa-paper-plane"></i> Submit Encrypted Audit
                     </button>
                 </div>
             </div>
-            
-            <!-- Step 4: Processing -->
-            <div class="wizard-step" id="step4">
-                <div class="step-header">
-                    <div class="step-number">4</div>
-                    <div class="step-info">
-                        <h2>Audit In Progress</h2>
-                        <p>Your contract is being analyzed in encrypted state</p>
+        </section>
+
+        <!-- Step 4: Processing -->
+        <section class="audit-section" id="step4">
+            <div class="section-container" data-aos="fade-up">
+                <div class="section-header">
+                    <h2>Audit In Progress</h2>
+                    <p class="section-subtitle">Your contract is being analyzed in encrypted state</p>
+                </div>
+                
+                <div class="processing-animation">
+                    <div class="fhe-spinner">
+                        <div class="fhe-ring"></div>
+                        <div class="fhe-ring"></div>
+                        <div class="fhe-ring"></div>
+                    </div>
+                    
+                    <div class="processing-text">
+                        <h3>Running Invisible Analysis</h3>
+                        <p>FHE computation in progress...</p>
                     </div>
                 </div>
                 
-                <div class="processing-visual">
-                    <div class="fhe-animation">
-                        <div class="fhe-circle"></div>
-                        <div class="fhe-circle"></div>
-                        <div class="fhe-circle"></div>
+                <div class="processing-steps">
+                    <div class="process-step completed">
+                        <div class="step-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="step-content">
+                            <h4>Contract Encrypted</h4>
+                            <p>Your parameters are secured with FHE</p>
+                        </div>
                     </div>
                     
-                    <div class="processing-steps">
-                        <div class="processing-step active">
-                            <div class="step-check"><i class="fas fa-check"></i></div>
-                            <div class="step-text">Contract Encrypted</div>
+                    <div class="process-step completed">
+                        <div class="step-check">
+                            <i class="fas fa-check"></i>
                         </div>
-                        
-                        <div class="processing-step active">
-                            <div class="step-check"><i class="fas fa-check"></i></div>
-                            <div class="step-text">Submitted to FHEVM</div>
+                        <div class="step-content">
+                            <h4>Submitted to FHEVM</h4>
+                            <p>Transaction confirmed on blockchain</p>
                         </div>
-                        
-                        <div class="processing-step">
-                            <div class="step-check">2</div>
-                            <div class="step-text">Running Invisible Audit</div>
+                    </div>
+                    
+                    <div class="process-step active">
+                        <div class="step-check">
+                            <i class="fas fa-sync fa-spin"></i>
                         </div>
-                        
-                        <div class="processing-step">
-                            <div class="step-check">3</div>
-                            <div class="step-text">Generating Results</div>
+                        <div class="step-content">
+                            <h4>Running Analysis</h4>
+                            <p>Encrypted vulnerability detection</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-check">4</div>
+                        <div class="step-content">
+                            <h4>Generating Results</h4>
+                            <p>Creating encrypted risk report</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="audit-log">
                     <h3><i class="fas fa-terminal"></i> Audit Log</h3>
-                    <div class="log-content">
-                        <div class="log-entry success">
-                            <span class="log-time">14:23:01</span>
-                            <span class="log-message">✓ Contract parameters encrypted successfully</span>
-                        </div>
-                        <div class="log-entry success">
-                            <span class="log-time">14:23:02</span>
-                            <span class="log-message">✓ Submitted to FHEVM network</span>
-                        </div>
-                        <div class="log-entry info">
-                            <span class="log-time">14:23:03</span>
-                            <span class="log-message">⏳ Running encrypted vulnerability scan...</span>
+                    <div class="log-container">
+                        <div class="log-messages" id="auditLog">
+                            <div class="log-entry success">
+                                <span class="log-time">14:23:01</span>
+                                <span class="log-message">✓ Contract parameters encrypted successfully</span>
+                            </div>
+                            <div class="log-entry success">
+                                <span class="log-time">14:23:02</span>
+                                <span class="log-message">✓ Submitted to FHEVM network (Tx: 0x...)</span>
+                            </div>
+                            <div class="log-entry info">
+                                <span class="log-time">14:23:03</span>
+                                <span class="log-message">⏳ Running encrypted vulnerability scan...</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Step 5: Results -->
-            <div class="wizard-step" id="step5">
-                <div class="step-header">
-                    <div class="step-number">✓</div>
-                    <div class="step-info">
-                        <h2>Audit Complete</h2>
-                        <p>Results are ready for decryption</p>
-                    </div>
+        </section>
+
+        <!-- Step 5: Results -->
+        <section class="audit-section" id="step5">
+            <div class="section-container" data-aos="fade-up">
+                <div class="section-header">
+                    <h2>Audit Complete! 🎉</h2>
+                    <p class="section-subtitle">Your encrypted results are ready for decryption</p>
                 </div>
                 
-                <div class="results-container">
-                    <div class="result-card main-result">
+                <div class="results-grid">
+                    <div class="result-card main-result" data-aos="zoom-in">
                         <div class="result-header">
-                            <h3><i class="fas fa-shield-check"></i> Overall Risk Score</h3>
-                            <div class="risk-score">
-                                <div class="score-circle">
-                                    <svg width="120" height="120">
-                                        <circle cx="60" cy="60" r="54" stroke="#e5e7eb" stroke-width="8" fill="none"></circle>
-                                        <circle cx="60" cy="60" r="54" stroke="#10b981" stroke-width="8" fill="none" 
-                                                stroke-linecap="round" transform="rotate(-90 60 60)"
-                                                stroke-dasharray="339.292" stroke-dashoffset="203.575">
-                                        </circle>
-                                    </svg>
-                                    <div class="score-value">40</div>
-                                </div>
-                                <div class="score-label">MEDIUM RISK</div>
-                            </div>
+                            <h3><i class="fas fa-shield-check"></i> Security Score</h3>
+                            <div class="result-badge success">Excellent</div>
                         </div>
-                        
+                        <div class="result-score">
+                            <div class="score-circle">
+                                <svg width="200" height="200">
+                                    <circle cx="100" cy="100" r="90" stroke="#2d3748" stroke-width="8" fill="none"></circle>
+                                    <circle cx="100" cy="100" r="90" stroke="#FFD700" stroke-width="8" fill="none" 
+                                            stroke-linecap="round" transform="rotate(-90 100 100)"
+                                            stroke-dasharray="565.48" stroke-dashoffset="56.55"></circle>
+                                </svg>
+                                <div class="score-value">90%</div>
+                            </div>
+                            <div class="score-label">Overall Security</div>
+                        </div>
                         <div class="result-details">
                             <div class="detail-item">
-                                <span class="detail-label">Status:</span>
-                                <span class="detail-value status-warning">⚠️ Needs Attention</span>
+                                <span class="detail-label">Audit ID:</span>
+                                <span class="detail-value">AUDIT-742D35CC</span>
                             </div>
                             <div class="detail-item">
                                 <span class="detail-label">Auditor:</span>
                                 <span class="detail-value">Zama Security</span>
                             </div>
                             <div class="detail-item">
-                                <span class="detail-label">Audit ID:</span>
-                                <span class="detail-value">AUDIT-742D35CC</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Timestamp:</span>
-                                <span class="detail-value" id="auditTimestamp"></span>
+                                <span class="detail-label">Completion Time:</span>
+                                <span class="detail-value">2.1 hours</span>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="result-card">
-                        <h3><i class="fas fa-exclamation-triangle"></i> Detected Issues</h3>
-                        <div class="vulnerability-list">
-                            <div class="vuln-item high">
+                    <div class="result-card" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="result-header">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Vulnerabilities Found</h3>
+                            <div class="result-badge low">3 Issues</div>
+                        </div>
+                        <div class="vulnerabilities-list">
+                            <div class="vulnerability-item high">
                                 <div class="vuln-icon">⚠️</div>
                                 <div class="vuln-content">
                                     <div class="vuln-title">Oracle Update Delay</div>
                                     <div class="vuln-desc">45 seconds exceeds recommended 30s threshold</div>
                                 </div>
                             </div>
-                            <div class="vuln-item medium">
+                            <div class="vulnerability-item medium">
                                 <div class="vuln-icon">📊</div>
                                 <div class="vuln-content">
                                     <div class="vuln-title">Liquidity Depth</div>
-                                    <div class="vuln-desc">Pool depth below optimal level for AMM</div>
+                                    <div class="vuln-desc">Pool depth below optimal level for high volume</div>
                                 </div>
                             </div>
-                            <div class="vuln-item low">
+                            <div class="vulnerability-item low">
                                 <div class="vuln-icon">💸</div>
                                 <div class="vuln-content">
                                     <div class="vuln-title">Fee Structure</div>
@@ -424,760 +910,150 @@
                         </div>
                     </div>
                     
-                    <div class="result-card">
-                        <h3><i class="fas fa-lock"></i> Encrypted Results</h3>
+                    <div class="result-card" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="result-header">
+                            <h3><i class="fas fa-lock"></i> Encrypted Results</h3>
+                            <div class="result-badge">🔐</div>
+                        </div>
                         <div class="encrypted-results">
                             <div class="encrypted-data">
-                                <code>0x7b2273636f7265223a34302c2276756c6e65726162696c6974696573223a5b224f7261636c65207570646174652064656c6179222c224c6971756964697479206465707468225d7d</code>
+                                <code class="encrypted-code">0x7b2273636f7265223a39302c2276756c6e65726162696c6974696573223a5b224f7261636c65207570646174652064656c6179222c224c6971756964697479206465707468222c2246656520537472756374757265225d2c227265636f6d6d656e646174696f6e73223a5b2241646a757374206f7261636c652075706461746520746f20333073222c22496e63726561736520706f6f6c20646570746820746f20243130302c303030222c22436f6e73696465722064796e616d696320666565206d6f64656c225d7d</code>
                             </div>
-                            <button class="btn-secondary" onclick="decryptResults()">
-                                <i class="fas fa-key"></i> Decrypt Results Locally
-                            </button>
+                            <div class="encryption-actions">
+                                <button class="btn-outline" id="decryptResultsBtn">
+                                    <i class="fas fa-key"></i> Decrypt Locally
+                                </button>
+                                <button class="btn-primary" id="downloadReportBtn">
+                                    <i class="fas fa-download"></i> Download Report
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="result-actions">
-                    <a href="badges.html" class="btn-primary">
-                        <i class="fas fa-award"></i> Mint Audit Badge
-                    </a>
-                    <button class="btn-secondary">
-                        <i class="fas fa-download"></i> Download Report
+                    <button class="btn-primary btn-large" id="mintBadgeBtn">
+                        <i class="fas fa-award"></i> Mint Audit Badge NFT
                     </button>
-                    <a href="dashboard.html" class="btn-secondary">
+                    <button class="btn-outline" id="newAuditBtn">
+                        <i class="fas fa-plus"></i> Start New Audit
+                    </button>
+                    <a href="dashboard.html" class="btn-outline">
                         <i class="fas fa-tachometer-alt"></i> View Dashboard
                     </a>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
 
-    <footer class="footer">
-        <div class="container">
+    <!-- Footer -->
+    <footer class="footer" data-aos="fade-up">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="logo-text">
+                            <span class="logo-primary">INVISIBLE</span>
+                            <span class="logo-secondary">AUDIT</span>
+                        </div>
+                    </div>
+                    <p class="footer-description">
+                        World's first privacy-preserving audit layer powered by FHE technology.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="audit.html">Smart Contract Audit</a>
+                    <a href="badges.html">Audit Badges</a>
+                    <a href="#">API Documentation</a>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <a href="#">Documentation</a>
+                    <a href="#">Tutorials</a>
+                    <a href="#">Case Studies</a>
+                    <a href="#">Security</a>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <a href="#">About Us</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+            
             <div class="footer-bottom">
-                <p>© 2024 Invisible Audit Layer. All rights reserved. Built with FHE.</p>
-                <div class="tech-badges">
-                    <span class="tech-badge">FHEVM</span>
-                    <span class="tech-badge">Zero-Knowledge</span>
-                    <span class="tech-badge">Ethereum</span>
-                    <span class="tech-badge">Polygon</span>
+                <div class="copyright">
+                    © 2024 Invisible Audit Layer. All rights reserved.
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">FHEVM</span>
+                    <span class="tech-tag">Zero-Knowledge</span>
+                    <span class="tech-tag">Ethereum</span>
+                    <span class="tech-tag">Polygon</span>
                 </div>
             </div>
         </div>
     </footer>
 
-    <div class="mobile-nav-overlay">
-        <div class="mobile-nav-content">
-            <button class="close-mobile-nav"><i class="fas fa-times"></i></button>
-            <div class="mobile-nav-links">
-                <a href="index.html" class="mobile-nav-link"><i class="fas fa-home"></i> Home</a>
-                <a href="dashboard.html" class="mobile-nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                <a href="audit.html" class="mobile-nav-link active"><i class="fas fa-search"></i> Audit</a>
-                <a href="badges.html" class="mobile-nav-link"><i class="fas fa-award"></i> Badges</a>
-                <a href="profile.html" class="mobile-nav-link"><i class="fas fa-user"></i> Profile</a>
-            </div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <button class="close-menu" id="closeMenuBtn">
+                <i class="fas fa-times"></i>
+            </button>
+            <nav class="mobile-nav">
+                <a href="index.html" class="mobile-nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="dashboard.html" class="mobile-nav-link">
+                    <i class="fas fa-chart-network"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="audit.html" class="mobile-nav-link active">
+                    <i class="fas fa-search-shield"></i>
+                    <span>Audit</span>
+                </a>
+                <a href="badges.html" class="mobile-nav-link">
+                    <i class="fas fa-award"></i>
+                    <span>Badges</span>
+                </a>
+                <a href="profile.html" class="mobile-nav-link">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Profile</span>
+                </a>
+            </nav>
         </div>
     </div>
 
-    <script src="demo.js"></script>
-    <script>
-        let currentStep = 1;
-        
-        function updateReview() {
-            document.getElementById('reviewName').textContent = 
-                document.getElementById('contractName').value || 'My AMM Contract';
-            document.getElementById('reviewType').textContent = 
-                document.getElementById('contractType').options[document.getElementById('contractType').selectedIndex].text;
-            document.getElementById('reviewFee').textContent = 
-                document.getElementById('feeRate').value + ' bps';
-            document.getElementById('reviewLeverage').textContent = 
-                document.getElementById('maxLeverage').value + 'x';
-            document.getElementById('reviewDelay').textContent = 
-                document.getElementById('oracleDelay').value + ' seconds';
-            document.getElementById('reviewDepth').textContent = 
-                '$' + parseInt(document.getElementById('poolDepth').value).toLocaleString();
-            
-            document.getElementById('auditTimestamp').textContent = 
-                new Date().toLocaleString();
-        }
-        
-        function nextStep() {
-            if (currentStep === 3) {
-                updateReview();
-            }
-            
-            document.getElementById('step' + currentStep).classList.remove('active');
-            currentStep++;
-            document.getElementById('step' + currentStep).classList.add('active');
-            
-            if (currentStep === 4) {
-                simulateAuditProcess();
-            }
-        }
-        
-        function prevStep() {
-            document.getElementById('step' + currentStep).classList.remove('active');
-            currentStep--;
-            document.getElementById('step' + currentStep).classList.add('active');
-        }
-        
-        function submitAudit() {
-            nextStep();
-        }
-        
-        function simulateAuditProcess() {
-            const log = document.querySelector('.log-content');
-            const steps = document.querySelectorAll('.processing-step');
-            
-            let step = 2;
-            const interval = setInterval(() => {
-                if (step < 4) {
-                    // Update step
-                    steps[step].classList.add('active');
-                    
-                    // Add log entry
-                    const messages = [
-                        '✓ Running encrypted vulnerability checks...',
-                        '✓ Analyzing risk patterns...',
-                        '✓ Generating encrypted results...',
-                        '✓ Audit completed successfully!'
-                    ];
-                    
-                    const logEntry = document.createElement('div');
-                    logEntry.className = 'log-entry success';
-                    logEntry.innerHTML = `
-                        <span class="log-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'})}</span>
-                        <span class="log-message">${messages[step - 2]}</span>
-                    `;
-                    log.appendChild(logEntry);
-                    log.scrollTop = log.scrollHeight;
-                    
-                    step++;
-                } else {
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        nextStep();
-                    }, 2000);
-                }
-            }, 1500);
-        }
-        
-        function decryptResults() {
-            demoSystem.showNotification('Results decrypted locally! Score: 40/100', 'success');
-        }
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            updateReview();
-        });
-    </script>
-    
-    <style>
-        .audit-wizard {
-            max-width: 800px;
-            margin: 0 auto;
-            padding-bottom: 3rem;
-        }
-        
-        .wizard-step {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .wizard-step.active {
-            display: block;
-        }
-        
-        .step-header {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-        }
-        
-        .step-number {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-        
-        .step-info h2 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-        
-        .step-info p {
-            color: var(--gray);
-        }
-        
-        .form-container {
-            background: white;
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-        
-        .form-group label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--dark);
-        }
-        
-        .hint {
-            font-size: 0.8rem;
-            color: var(--gray);
-            font-weight: normal;
-        }
-        
-        input, select, textarea {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid var(--gray-light);
-            border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-        
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-        }
-        
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-            font-family: monospace;
-        }
-        
-        .step-actions {
-            display: flex;
-            justify-content: space-between;
-            padding: 2rem 0;
-        }
-        
-        .encryption-visual {
-            background: white;
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-        }
-        
-        .encryption-flow {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        
-        .flow-item {
-            flex: 1;
-            min-width: 150px;
-            text-align: center;
-            padding: 1.5rem;
-            background: var(--light);
-            border-radius: 12px;
-        }
-        
-        .flow-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-        
-        .flow-text {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-        
-        .flow-status {
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        
-        .flow-arrow {
-            color: var(--primary);
-            font-size: 1.5rem;
-        }
-        
-        .privacy-settings {
-            background: white;
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-        }
-        
-        .privacy-settings h3 {
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .privacy-option {
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            border: 1px solid var(--gray-light);
-            border-radius: 8px;
-            transition: var(--transition);
-        }
-        
-        .privacy-option:hover {
-            border-color: var(--primary);
-        }
-        
-        .checkbox-label {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            cursor: pointer;
-            font-weight: 500;
-        }
-        
-        .checkbox-label input {
-            width: auto;
-        }
-        
-        .option-description {
-            margin-left: 2rem;
-            margin-top: 0.5rem;
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-        
-        .review-summary {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .summary-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-        }
-        
-        .summary-card h3 {
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--gray-light);
-        }
-        
-        .summary-item:last-child {
-            border-bottom: none;
-        }
-        
-        .status-yes {
-            color: var(--secondary);
-        }
-        
-        .encryption-preview {
-            background: white;
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-        }
-        
-        .code-preview {
-            background: var(--dark);
-            color: #10b981;
-            padding: 1rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            font-family: monospace;
-            font-size: 0.9rem;
-            margin-top: 1rem;
-        }
-        
-        .processing-visual {
-            text-align: center;
-            padding: 3rem 2rem;
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-        }
-        
-        .fhe-animation {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        
-        .fhe-circle {
-            width: 20px;
-            height: 20px;
-            background: var(--primary);
-            border-radius: 50%;
-            animation: pulse 1.5s infinite;
-        }
-        
-        .fhe-circle:nth-child(2) {
-            animation-delay: 0.5s;
-        }
-        
-        .fhe-circle:nth-child(3) {
-            animation-delay: 1s;
-        }
-        
-        .processing-steps {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .processing-steps::before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 20px;
-            right: 20px;
-            height: 2px;
-            background: var(--gray-light);
-            z-index: 1;
-        }
-        
-        .processing-step {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            flex: 1;
-        }
-        
-        .step-check {
-            width: 30px;
-            height: 30px;
-            background: var(--gray-light);
-            color: var(--gray);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 0.5rem;
-            font-weight: 600;
-        }
-        
-        .processing-step.active .step-check {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .step-text {
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        
-        .processing-step.active .step-text {
-            color: var(--dark);
-            font-weight: 500;
-        }
-        
-        .audit-log {
-            background: white;
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-        }
-        
-        .log-content {
-            max-height: 200px;
-            overflow-y: auto;
-            background: var(--light);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-        }
-        
-        .log-entry {
-            display: flex;
-            gap: 1rem;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--gray-light);
-        }
-        
-        .log-entry:last-child {
-            border-bottom: none;
-        }
-        
-        .log-time {
-            color: var(--gray);
-            font-family: monospace;
-            font-size: 0.9rem;
-            min-width: 70px;
-        }
-        
-        .log-entry.success .log-message {
-            color: var(--secondary);
-        }
-        
-        .log-entry.info .log-message {
-            color: var(--warning);
-        }
-        
-        .results-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .result-card {
-            background: white;
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-        }
-        
-        .result-card.main-result {
-            border: 2px solid var(--primary);
-        }
-        
-        .result-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        
-        .risk-score {
-            text-align: center;
-        }
-        
-        .score-circle {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto;
-        }
-        
-        .score-value {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--dark);
-        }
-        
-        .score-label {
-            margin-top: 0.5rem;
-            font-weight: 600;
-            color: var(--warning);
-        }
-        
-        .result-details {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-        
-        .detail-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--gray-light);
-        }
-        
-        .detail-item:last-child {
-            border-bottom: none;
-        }
-        
-        .detail-label {
-            color: var(--gray);
-        }
-        
-        .detail-value {
-            font-weight: 500;
-        }
-        
-        .status-warning {
-            color: var(--warning);
-        }
-        
-        .vulnerability-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .vuln-item {
-            display: flex;
-            gap: 1rem;
-            padding: 1rem;
-            border-radius: 8px;
-            border-left: 4px solid;
-        }
-        
-        .vuln-item.high {
-            border-left-color: var(--danger);
-            background: #fee2e2;
-        }
-        
-        .vuln-item.medium {
-            border-left-color: var(--warning);
-            background: #fef3c7;
-        }
-        
-        .vuln-item.low {
-            border-left-color: var(--secondary);
-            background: #d1fae5;
-        }
-        
-        .vuln-icon {
-            font-size: 1.2rem;
-        }
-        
-        .vuln-title {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-        
-        .vuln-desc {
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        
-        .encrypted-results {
-            text-align: center;
-        }
-        
-        .encrypted-data {
-            background: var(--dark);
-            color: #10b981;
-            padding: 1rem;
-            border-radius: 8px;
-            font-family: monospace;
-            font-size: 0.8rem;
-            overflow-x: auto;
-            margin-bottom: 1.5rem;
-            word-break: break-all;
-        }
-        
-        .result-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
-        }
-        
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.5;
-                transform: scale(0.8);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-            
-            .encryption-flow {
-                flex-direction: column;
-            }
-            
-            .flow-arrow {
-                transform: rotate(90deg);
-            }
-            
-            .processing-steps {
-                flex-direction: column;
-                gap: 2rem;
-            }
-            
-            .processing-steps::before {
-                display: none;
-            }
-            
-            .result-details {
-                grid-template-columns: 1fr;
-            }
-            
-            .result-header {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .step-header {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-            }
-            
-            .step-actions {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .step-actions button {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .result-actions {
-                flex-direction: column;
-            }
-            
-            .result-actions a,
-            .result-actions button {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-    </style>
+    <!-- Notification Container -->
+    <div id="notificationContainer"></div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="script-audit.js"></script>
 </body>
 </html>

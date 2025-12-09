@@ -4,13 +4,550 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Audit Badges | Invisible Audit Layer</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            /* Yellow Theme Colors */
+            --primary: #FFD700;
+            --primary-dark: #FFC300;
+            --primary-light: #FFF9C4;
+            --secondary: #6366F1;
+            --dark: #111827;
+            --gray-dark: #1F2937;
+            --gray: #6B7280;
+            --gray-light: #E5E7EB;
+            --light: #F9FAFB;
+            --danger: #EF4444;
+            --warning: #F59E0B;
+            --success: #10B981;
+            
+            --border-radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --shadow-yellow: 0 10px 40px rgba(255, 215, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Modern Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--gray-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link:hover {
+            color: white;
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+            background: rgba(255, 215, 0, 0.15);
+        }
+
+        .connect-wallet-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--dark);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .connect-wallet-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-yellow);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 160px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), white);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--gray-light);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* Animated Gradient Background */
+        .gradient-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1000px;
+            height: 1000px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, rgba(255, 195, 0, 0.05) 30%, transparent 70%);
+            z-index: 1;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), white);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--gray-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Badge Cards */
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .badge-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .badge-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-yellow);
+        }
+
+        .badge-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .badge-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--dark);
+        }
+
+        .badge-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .badge-action {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .badge-action:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: rotate(15deg);
+        }
+
+        .badge-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .badge-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--gray-light);
+        }
+
+        .badge-token {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: var(--primary);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            margin-bottom: 1.5rem;
+        }
+
+        .badge-verification {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        /* Mint Section */
+        .mint-section {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 24px;
+            padding: 4rem;
+            margin-top: 4rem;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .audit-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .audit-option {
+            background: rgba(30, 41, 59, 0.8);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .audit-option:hover {
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .audit-option.selected {
+            border-color: var(--primary);
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        /* Workflow */
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .workflow-step {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .workflow-step:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0 auto 1.5rem;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--dark);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-yellow);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(15, 23, 42, 0.95);
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+            padding: 4rem 0 2rem;
+            margin-top: 6rem;
+        }
+
+        .tech-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .tech-badge {
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        /* Animation Classes */
+        .animate-text {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .mint-section {
+                padding: 2rem;
+            }
+            
+            .badges-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+    </style>
 </head>
 <body>
+    <!-- Navbar -->
     <nav class="navbar">
-        <div class="nav-container">
+        <div class="container nav-container">
             <a href="index.html" class="logo">
                 <i class="fas fa-shield-alt"></i>
                 <span>InvisibleAudit</span>
@@ -25,150 +562,107 @@
             <button class="connect-wallet-btn">
                 <i class="fas fa-plug"></i> Connect Wallet
             </button>
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
         </div>
     </nav>
 
-    <main class="container">
-        <div class="page-header">
-            <h1>Audit Badges</h1>
-            <p>Verifiable NFT badges for your successful audits</p>
-        </div>
-
-        <div class="badges-intro">
-            <div class="intro-card">
-                <div class="intro-icon">
-                    <i class="fas fa-shield-check"></i>
-                </div>
-                <div class="intro-content">
-                    <h2>What are Audit Badges?</h2>
-                    <p>Audit Badges are non-transferable NFTs that prove your contract has been audited without revealing sensitive details. They provide verifiable trust while maintaining privacy.</p>
-                    <div class="intro-features">
-                        <div class="feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Zero-knowledge proof of audit</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>No sensitive data leakage</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Verifiable on-chain</span>
-                        </div>
-                    </div>
-                </div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="gradient-bg"></div>
+        <div class="container hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-bolt"></i>
+                <span>Verifiable Trust Layer</span>
             </div>
+            <h1 class="hero-title animate-text">Audit Badges</h1>
+            <p class="hero-subtitle animate-text">
+                Non-transferable NFTs that prove your contract security with zero-knowledge privacy.
+                Share trust without revealing sensitive audit details.
+            </p>
+            <button class="btn-primary animate-text" style="margin-top: 2rem;">
+                <i class="fas fa-rocket"></i> Start Your First Audit
+            </button>
         </div>
+    </section>
 
-        <div class="badges-section">
-            <h2>Your Badges</h2>
+    <!-- Badges Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Your Audit Badges</h2>
+                <p class="section-subtitle">
+                    Each badge represents a successfully audited contract with verifiable proof
+                </p>
+            </div>
+
             <div class="badges-grid" id="badgesGrid">
                 <!-- Badges will be loaded here -->
             </div>
-            
-            <div class="empty-state" id="emptyBadges">
-                <div class="empty-icon">
+
+            <div class="empty-state" id="emptyBadges" style="text-align: center; padding: 4rem;">
+                <div style="font-size: 4rem; color: var(--primary); margin-bottom: 1.5rem;">
                     <i class="fas fa-award"></i>
                 </div>
-                <h3>No badges yet</h3>
-                <p>Complete your first audit to mint an audit badge</p>
+                <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">No badges yet</h3>
+                <p style="color: var(--gray-light); margin-bottom: 2rem;">
+                    Complete your first privacy-preserving audit to mint your first badge
+                </p>
                 <a href="audit.html" class="btn-primary">
-                    <i class="fas fa-rocket"></i> Start Your First Audit
+                    <i class="fas fa-play"></i> Start Auditing
                 </a>
             </div>
         </div>
+    </section>
 
-        <div class="badges-section">
-            <h2>Mint New Badge</h2>
-            <div class="mint-badge-card">
-                <div class="mint-header">
-                    <h3><i class="fas fa-plus-circle"></i> Select Audit to Mint</h3>
-                    <p>Choose a completed audit to mint as verifiable badge</p>
+    <!-- Mint Section -->
+    <section class="section">
+        <div class="container">
+            <div class="mint-section">
+                <div class="section-header">
+                    <h2 class="section-title">Mint New Badge</h2>
+                    <p class="section-subtitle">
+                        Convert your completed audits into verifiable NFT badges
+                    </p>
                 </div>
-                
-                <div class="audit-selection">
-                    <div class="audit-option selected" data-audit-id="1">
-                        <div class="audit-info">
-                            <div class="audit-name">Uniswap V4 Pool</div>
-                            <div class="audit-meta">
-                                <span class="risk-score">Risk: 15/100</span>
-                                <span class="audit-date">Audited: 2 days ago</span>
-                            </div>
+
+                <div class="audit-options">
+                    <div class="audit-option selected" onclick="selectAudit(1)">
+                        <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Uniswap V4 Pool</h3>
+                        <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                            <span style="color: var(--success); font-weight: 600;">Risk: 15/100</span>
+                            <span style="color: var(--gray-light);">2 days ago</span>
                         </div>
-                        <div class="audit-select">
-                            <div class="select-circle"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="audit-option" data-audit-id="2">
-                        <div class="audit-info">
-                            <div class="audit-name">AAVE Lending Pool</div>
-                            <div class="audit-meta">
-                                <span class="risk-score">Risk: 28/100</span>
-                                <span class="audit-date">Audited: 1 week ago</span>
-                            </div>
-                        </div>
-                        <div class="audit-select">
-                            <div class="select-circle"></div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 8px; height: 8px; background: var(--success); border-radius: 50%;"></div>
+                            <span style="font-size: 0.9rem; color: var(--gray-light);">Ready to mint</span>
                         </div>
                     </div>
-                    
-                    <div class="audit-option disabled" data-audit-id="3">
-                        <div class="audit-info">
-                            <div class="audit-name">New AMM Contract</div>
-                            <div class="audit-meta">
-                                <span class="badge-required">Complete audit first</span>
-                            </div>
+
+                    <div class="audit-option" onclick="selectAudit(2)">
+                        <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">AAVE Lending Pool</h3>
+                        <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                            <span style="color: var(--warning); font-weight: 600;">Risk: 28/100</span>
+                            <span style="color: var(--gray-light);">1 week ago</span>
                         </div>
-                        <div class="audit-select">
-                            <div class="select-circle"></div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 8px; height: 8px; background: var(--warning); border-radius: 50%;"></div>
+                            <span style="font-size: 0.9rem; color: var(--gray-light);">Ready to mint</span>
                         </div>
                     </div>
-                </div>
-                
-                <div class="mint-preview">
-                    <h4>Badge Preview</h4>
-                    <div class="badge-preview-card">
-                        <div class="badge-header">
-                            <div class="badge-icon">
-                                <i class="fas fa-shield-check"></i>
-                            </div>
-                            <div class="badge-title">
-                                <h3>Secure Audit</h3>
-                                <p>Invisible Audit Layer</p>
-                            </div>
+
+                    <div class="audit-option" onclick="selectAudit(3)">
+                        <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">New AMM Contract</h3>
+                        <div style="margin-bottom: 1rem;">
+                            <span style="color: var(--danger); font-weight: 600;">Complete audit first</span>
                         </div>
-                        <div class="badge-body">
-                            <div class="badge-attribute">
-                                <span class="attr-label">Contract:</span>
-                                <span class="attr-value" id="previewContract">Uniswap V4 Pool</span>
-                            </div>
-                            <div class="badge-attribute">
-                                <span class="attr-label">Auditor:</span>
-                                <span class="attr-value">Zama Security</span>
-                            </div>
-                            <div class="badge-attribute">
-                                <span class="attr-label">Issued:</span>
-                                <span class="attr-value" id="previewDate">Today</span>
-                            </div>
-                            <div class="badge-attribute">
-                                <span class="attr-label">Token ID:</span>
-                                <span class="attr-value">#BADGE-742D35CC</span>
-                            </div>
-                        </div>
-                        <div class="badge-footer">
-                            <div class="privacy-note">
-                                <i class="fas fa-eye-slash"></i> Zero-knowledge proof
-                            </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 8px; height: 8px; background: var(--danger); border-radius: 50%;"></div>
+                            <span style="font-size: 0.9rem; color: var(--gray-light);">Audit required</span>
                         </div>
                     </div>
                 </div>
-                
-                <div class="mint-actions">
-                    <button class="btn-secondary">
+
+                <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 3rem;">
+                    <button class="btn-secondary" onclick="previewMetadata()">
                         <i class="fas fa-eye"></i> Preview Metadata
                     </button>
                     <button class="btn-primary" onclick="mintBadge()">
@@ -177,92 +671,164 @@
                 </div>
             </div>
         </div>
+    </section>
 
-        <div class="badges-section">
-            <h2>How Badges Work</h2>
-            <div class="workflow-steps">
+    <!-- How It Works -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">How Badges Work</h2>
+                <p class="section-subtitle">
+                    Privacy-preserving verification process for maximum security
+                </p>
+            </div>
+
+            <div class="workflow-grid">
                 <div class="workflow-step">
                     <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Complete Audit</h3>
-                        <p>Successfully audit your smart contract through our privacy-preserving system</p>
-                    </div>
+                    <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Complete Audit</h3>
+                    <p style="color: var(--gray-light);">
+                        Audit your contract through our FHE-powered privacy system
+                    </p>
                 </div>
-                
+
                 <div class="workflow-step">
                     <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Generate Proof</h3>
-                        <p>Create zero-knowledge proof of audit completion without revealing scores</p>
-                    </div>
+                    <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Generate Proof</h3>
+                    <p style="color: var(--gray-light);">
+                        Create zero-knowledge proof without revealing audit details
+                    </p>
                 </div>
-                
+
                 <div class="workflow-step">
                     <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>Mint NFT</h3>
-                        <p>Mint non-transferable NFT badge on Ethereum/Polygon with encrypted metadata</p>
-                    </div>
+                    <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Mint NFT</h3>
+                    <p style="color: var(--gray-light);">
+                        Mint non-transferable badge with encrypted metadata
+                    </p>
                 </div>
-                
+
                 <div class="workflow-step">
                     <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3>Verify Trust</h3>
-                        <p>Share badge with users/investors for verifiable trust without data leakage</p>
-                    </div>
+                    <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Verify Trust</h3>
+                    <p style="color: var(--gray-light);">
+                        Share verifiable proof with users and investors
+                    </p>
                 </div>
             </div>
         </div>
-    </main>
+    </section>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-bottom">
-                <p>© 2024 Invisible Audit Layer. All rights reserved. Built with FHE.</p>
-                <div class="tech-badges">
-                    <span class="tech-badge">FHEVM</span>
-                    <span class="tech-badge">Zero-Knowledge</span>
-                    <span class="tech-badge">Ethereum</span>
-                    <span class="tech-badge">Polygon</span>
-                </div>
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <a href="index.html" class="logo" style="font-size: 1.8rem; margin-bottom: 1rem; display: inline-block;">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>InvisibleAudit</span>
+                </a>
+                <p style="color: var(--gray-light); max-width: 600px; margin: 0 auto;">
+                    The privacy-preserving audit layer for Web3. Built with FHE and zero-knowledge proofs.
+                </p>
+            </div>
+            
+            <div class="tech-badges">
+                <span class="tech-badge">FHEVM</span>
+                <span class="tech-badge">Zero-Knowledge</span>
+                <span class="tech-badge">Ethereum</span>
+                <span class="tech-badge">Polygon</span>
+                <span class="tech-badge">Arbitrum</span>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                <p style="color: var(--gray);">
+                    © 2024 Invisible Audit Layer. All rights reserved.
+                </p>
             </div>
         </div>
     </footer>
 
-    <div class="mobile-nav-overlay">
-        <div class="mobile-nav-content">
-            <button class="close-mobile-nav"><i class="fas fa-times"></i></button>
-            <div class="mobile-nav-links">
-                <a href="index.html" class="mobile-nav-link"><i class="fas fa-home"></i> Home</a>
-                <a href="dashboard.html" class="mobile-nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                <a href="audit.html" class="mobile-nav-link"><i class="fas fa-search"></i> Audit</a>
-                <a href="badges.html" class="mobile-nav-link active"><i class="fas fa-award"></i> Badges</a>
-                <a href="profile.html" class="mobile-nav-link"><i class="fas fa-user"></i> Profile</a>
-            </div>
-        </div>
-    </div>
-
-    <script src="demo.js"></script>
     <script>
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero animation
+        gsap.to('.hero-title', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.2,
+            ease: 'power3.out'
+        });
+
+        gsap.to('.hero-subtitle', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.4,
+            ease: 'power3.out'
+        });
+
+        // Section animations
+        gsap.utils.toArray('.animate-text').forEach(el => {
+            gsap.to(el, {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+        });
+
+        // Badge cards animation
+        gsap.utils.toArray('.badge-card').forEach((card, i) => {
+            gsap.to(card, {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                delay: i * 0.1,
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%'
+                }
+            });
+        });
+
+        // Workflow steps animation
+        gsap.utils.toArray('.workflow-step').forEach((step, i) => {
+            gsap.to(step, {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                delay: i * 0.2,
+                scrollTrigger: {
+                    trigger: step,
+                    start: 'top 85%'
+                }
+            });
+        });
+
+        // Original functionality (preserved)
         function loadBadges() {
             const badges = JSON.parse(localStorage.getItem('auditBadges') || '[]');
             const grid = document.getElementById('badgesGrid');
             const emptyState = document.getElementById('emptyBadges');
             
             if (badges.length === 0) {
-                grid.style.display = 'none';
+                grid.innerHTML = '';
                 emptyState.style.display = 'block';
                 return;
             }
             
             emptyState.style.display = 'none';
-            grid.style.display = 'grid';
             
             grid.innerHTML = badges.map(badge => `
                 <div class="badge-card">
                     <div class="badge-header">
-                        <div class="badge-icon ${getRiskClass(badge.score)}">
+                        <div class="badge-icon">
                             <i class="fas fa-shield-check"></i>
                         </div>
                         <div class="badge-actions">
@@ -274,97 +840,86 @@
                             </button>
                         </div>
                     </div>
-                    <div class="badge-body">
-                        <h3>${badge.contractName}</h3>
-                        <div class="badge-meta">
-                            <div class="meta-item">
-                                <i class="fas fa-chart-line"></i>
-                                <span>Risk: ${badge.score}/100</span>
-                            </div>
-                            <div class="meta-item">
-                                <i class="fas fa-calendar"></i>
-                                <span>${new Date(badge.mintedAt).toLocaleDateString()}</span>
-                            </div>
+                    <h3 class="badge-name">${badge.contractName}</h3>
+                    <div class="badge-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Risk: ${badge.score}/100</span>
                         </div>
-                        <div class="badge-token">
-                            <code>${badge.tokenId}</code>
+                        <div class="meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>${new Date(badge.mintedAt).toLocaleDateString()}</span>
                         </div>
                     </div>
-                    <div class="badge-footer">
-                        <div class="verification ${getRiskClass(badge.score)}">
-                            <i class="fas fa-check-circle"></i>
-                            ${getVerificationText(badge.score)}
-                        </div>
+                    <div class="badge-token">
+                        ${badge.tokenId}
+                    </div>
+                    <div class="badge-verification">
+                        <i class="fas fa-check-circle"></i>
+                        ${badge.score < 30 ? 'Excellent Security' : badge.score < 70 ? 'Good Security' : 'Needs Improvement'}
                     </div>
                 </div>
             `).join('');
         }
-        
-        function getRiskClass(score) {
-            if (score < 30) return 'low-risk';
-            if (score < 70) return 'medium-risk';
-            return 'high-risk';
-        }
-        
-        function getVerificationText(score) {
-            if (score < 30) return 'Excellent Security';
-            if (score < 70) return 'Good Security';
-            return 'Needs Improvement';
-        }
-        
+
         function selectAudit(auditId) {
             document.querySelectorAll('.audit-option').forEach(option => {
                 option.classList.remove('selected');
-                if (option.dataset.auditId === auditId.toString()) {
-                    option.classList.add('selected');
-                    
-                    const auditName = option.querySelector('.audit-name').textContent;
-                    document.getElementById('previewContract').textContent = auditName;
-                    document.getElementById('previewDate').textContent = 
-                        new Date().toLocaleDateString();
-                }
             });
+            
+            const selected = document.querySelectorAll('.audit-option')[auditId - 1];
+            if (selected) {
+                selected.classList.add('selected');
+            }
         }
-        
+
         function mintBadge() {
-            if (!demoSystem.currentUser) {
-                demoSystem.showNotification('Please connect wallet first!', 'warning');
+            const selected = document.querySelector('.audit-option.selected');
+            if (!selected || selected.textContent.includes('Complete audit first')) {
+                alert('Please select a completed audit to mint');
                 return;
             }
-            
-            const selectedAudit = document.querySelector('.audit-option.selected');
-            if (!selectedAudit || selectedAudit.classList.contains('disabled')) {
-                demoSystem.showNotification('Please select a completed audit', 'warning');
-                return;
-            }
-            
-            const auditId = selectedAudit.dataset.auditId;
-            const auditName = selectedAudit.querySelector('.audit-name').textContent;
-            
-            // Simulate minting
-            demoSystem.showNotification(`Minting badge for ${auditName}...`, 'info');
-            
+
+            const contractName = selected.querySelector('h3').textContent;
+            const riskText = selected.querySelector('[style*="color: var(--success)"], [style*="color: var(--warning)"]');
+            const riskScore = riskText ? parseInt(riskText.textContent.match(/\d+/)[0]) : 50;
+
+            // Show loading
+            const originalText = event.target.innerHTML;
+            event.target.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Minting...';
+            event.target.disabled = true;
+
             setTimeout(() => {
-                const tokenId = 'BADGE-' + Date.now();
+                const tokenId = 'BADGE-' + Math.random().toString(36).substr(2, 9).toUpperCase();
                 const badges = JSON.parse(localStorage.getItem('auditBadges') || '[]');
+                
                 badges.push({
-                    auditId: auditId,
-                    contractName: auditName,
-                    score: auditId === '1' ? 15 : 28,
+                    contractName: contractName,
+                    score: riskScore,
                     mintedAt: Date.now(),
                     tokenId: tokenId
                 });
                 
                 localStorage.setItem('auditBadges', JSON.stringify(badges));
-                demoSystem.showNotification(`Badge minted successfully! Token: ${tokenId}`, 'success');
-                loadBadges();
+                
+                // Show success
+                event.target.innerHTML = '<i class="fas fa-check"></i> Minted!';
+                event.target.style.background = 'linear-gradient(135deg, var(--success), #059669)';
+                
+                // Reload badges
+                setTimeout(() => {
+                    loadBadges();
+                    event.target.innerHTML = originalText;
+                    event.target.disabled = false;
+                    event.target.style.background = '';
+                }, 1500);
             }, 2000);
         }
-        
+
         function viewBadge(tokenId) {
-            demoSystem.showNotification(`Viewing badge: ${tokenId}`, 'info');
+            alert(`Viewing badge details for: ${tokenId}`);
         }
-        
+
         function shareBadge(tokenId) {
             if (navigator.share) {
                 navigator.share({
@@ -373,524 +928,25 @@
                     url: window.location.href
                 });
             } else {
-                demoSystem.showNotification('Link copied to clipboard!', 'success');
+                navigator.clipboard.writeText(window.location.href);
+                alert('Link copied to clipboard!');
             }
         }
-        
+
+        function previewMetadata() {
+            alert('Previewing badge metadata...');
+        }
+
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             loadBadges();
+            selectAudit(1);
             
-            // Setup audit selection
-            document.querySelectorAll('.audit-option:not(.disabled)').forEach(option => {
-                option.addEventListener('click', () => {
-                    selectAudit(option.dataset.auditId);
-                });
+            // Connect wallet button
+            document.querySelector('.connect-wallet-btn').addEventListener('click', () => {
+                alert('Wallet connection simulated');
             });
-            
-            // Initialize with first audit selected
-            selectAudit('1');
         });
     </script>
-    
-    <style>
-        .badges-intro {
-            margin-bottom: 3rem;
-        }
-        
-        .intro-card {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        @media (min-width: 768px) {
-            .intro-card {
-                grid-template-columns: auto 1fr;
-            }
-        }
-        
-        .intro-icon {
-            font-size: 4rem;
-            color: rgba(255, 255, 255, 0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .intro-content h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: white;
-        }
-        
-        .intro-content p {
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-            opacity: 0.9;
-        }
-        
-        .intro-features {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.75rem;
-        }
-        
-        @media (min-width: 480px) {
-            .intro-features {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        .feature {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .feature i {
-            color: #10b981;
-        }
-        
-        .badges-section {
-            margin-bottom: 3rem;
-        }
-        
-        .badges-section h2 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-        
-        .badges-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .badge-card {
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            transition: var(--transition);
-            border: 2px solid transparent;
-        }
-        
-        .badge-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .badge-header {
-            padding: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-        
-        .badge-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            color: white;
-        }
-        
-        .badge-icon.low-risk { background: var(--secondary); }
-        .badge-icon.medium-risk { background: var(--warning); }
-        .badge-icon.high-risk { background: var(--danger); }
-        
-        .badge-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-        
-        .badge-action {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: none;
-            background: var(--light);
-            color: var(--gray);
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .badge-action:hover {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .badge-body {
-            padding: 0 1.5rem 1.5rem;
-        }
-        
-        .badge-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-        
-        .badge-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        
-        .badge-token {
-            background: var(--light);
-            padding: 0.75rem;
-            border-radius: 8px;
-            font-family: monospace;
-            font-size: 0.8rem;
-            color: var(--dark);
-            word-break: break-all;
-        }
-        
-        .badge-footer {
-            padding: 1rem 1.5rem;
-            background: var(--light);
-            border-top: 1px solid var(--gray-light);
-        }
-        
-        .verification {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        
-        .verification.low-risk { color: var(--secondary); }
-        .verification.medium-risk { color: var(--warning); }
-        .verification.high-risk { color: var(--danger); }
-        
-        .empty-state {
-            text-align: center;
-            padding: 3rem 2rem;
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-        }
-        
-        .empty-icon {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        .empty-state h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-        
-        .empty-state p {
-            color: var(--gray);
-            margin-bottom: 2rem;
-        }
-        
-        .mint-badge-card {
-            background: white;
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-        }
-        
-        .mint-header {
-            margin-bottom: 2rem;
-        }
-        
-        .mint-header h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .mint-header p {
-            color: var(--gray);
-        }
-        
-        .audit-selection {
-            margin-bottom: 2rem;
-        }
-        
-        .audit-option {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            border: 2px solid var(--gray-light);
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        
-        .audit-option:hover {
-            border-color: var(--primary);
-        }
-        
-        .audit-option.selected {
-            border-color: var(--primary);
-            background: rgba(99, 102, 241, 0.05);
-        }
-        
-        .audit-option.disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        
-        .audit-info {
-            flex: 1;
-        }
-        
-        .audit-name {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            color: var(--dark);
-        }
-        
-        .audit-meta {
-            display: flex;
-            gap: 1rem;
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        
-        .risk-score {
-            color: var(--warning);
-            font-weight: 500;
-        }
-        
-        .badge-required {
-            color: var(--danger);
-        }
-        
-        .audit-select {
-            width: 24px;
-            height: 24px;
-            border: 2px solid var(--gray);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .audit-option.selected .audit-select {
-            border-color: var(--primary);
-            background: var(--primary);
-        }
-        
-        .select-circle {
-            width: 12px;
-            height: 12px;
-            background: white;
-            border-radius: 50%;
-        }
-        
-        .audit-option.selected .select-circle {
-            display: block;
-        }
-        
-        .mint-preview {
-            margin-bottom: 2rem;
-        }
-        
-        .mint-preview h4 {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-        
-        .badge-preview-card {
-            border: 2px solid var(--gray-light);
-            border-radius: 12px;
-            padding: 1.5rem;
-            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-        }
-        
-        .badge-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .badge-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--primary);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-        }
-        
-        .badge-title h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.25rem;
-            color: var(--dark);
-        }
-        
-        .badge-title p {
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-        
-        .badge-body {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        @media (min-width: 480px) {
-            .badge-body {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        
-        .badge-attribute {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-        
-        .attr-label {
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-        
-        .attr-value {
-            font-weight: 500;
-            color: var(--dark);
-        }
-        
-        .badge-footer {
-            text-align: center;
-        }
-        
-        .privacy-note {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--primary);
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-        
-        .mint-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 1rem;
-        }
-        
-        .workflow-steps {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-        
-        @media (min-width: 768px) {
-            .workflow-steps {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (min-width: 1024px) {
-            .workflow-steps {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-        
-        .workflow-step {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .step-number {
-            width: 40px;
-            height: 40px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            flex-shrink: 0;
-        }
-        
-        .step-content h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-        
-        .step-content p {
-            color: var(--gray);
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-        
-        @media (max-width: 768px) {
-            .badges-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .mint-actions {
-                flex-direction: column;
-            }
-            
-            .mint-actions button {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .intro-card {
-                padding: 1.5rem;
-            }
-            
-            .mint-badge-card {
-                padding: 1.5rem;
-            }
-            
-            .badge-preview-card {
-                padding: 1rem;
-            }
-        }
-    </style>
 </body>
 </html>
