@@ -43,6 +43,7 @@ Projects select only the numeric values relevant to risk analysis:
   "oracleUpdateDelay": 45,
   "poolDepth": 120000
 }
+````
 
 All values are encrypted via the FHE client SDK and submitted to the FHEVM.
 
