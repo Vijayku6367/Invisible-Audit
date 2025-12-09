@@ -50,7 +50,7 @@ All values are encrypted via the FHE client SDK and submitted to the FHEVM.
 
 ---
 
-2️⃣ Auditor → Encrypted Rule Engine
+# 2️⃣ Auditor → Encrypted Rule Engine
 
 Auditors deploy an encrypted vulnerability-scoring engine containing logic like:
 
@@ -71,7 +71,7 @@ Projects cannot reverse-engineer it.
 
 ---
 
-3️⃣ Output → Encrypted Score Returned
+# 3️⃣ Output → Encrypted Score Returned
 
 The FHEVM computes an encrypted result:
 
@@ -92,7 +92,7 @@ Projects never see the detection logic.
 
 ---
 
-🔐 Privacy Matrix
+# 🔐 Privacy Matrix
 
 Layer	Hidden From Project	Hidden From Auditor
 
@@ -106,7 +106,7 @@ Both sides stay private during the entire process.
 
 ---
 
-🏗️ Architecture Components
+# 🏗️ Architecture Components
 
 📌 Smart Contracts
 
@@ -135,7 +135,7 @@ Contains no sensitive data
 
 ---
 
-📦 Core Modules
+# 📦 Core Modules
 
 Module 1 — Encrypted Input Encoder
 
@@ -167,7 +167,7 @@ A tamper-proof proof-of-audit, without exposing private data.
 
 ---
 
-🧪 Example Audit Run
+# 🧪 Example Audit Run
 
 1. Project encrypts fee = 25 → submits.
 
@@ -201,7 +201,7 @@ No data leaks on either side.
 
 ---
 
-🎨 Demo UI Flow
+# 🎨 Demo UI Flow
 
 The recommended frontend includes:
 
@@ -221,7 +221,7 @@ Perfect for hackathons, enterprise demos, and production dashboards.
 
 ---
 
-📘 Roadmap
+# 📘 Roadmap
 
 Full reference contract implementation
 
@@ -231,20 +231,12 @@ Auditor model builder templates
 
 Multi-chain audit support
 
-On-chain badge registry
-
-
-
----
-
-📝 License
-
-MIT (or add your preferred license).
+On-chain badge registr
 
 
 ---
 
-🤝 Contributions
+# 🤝 Contributions
 
 Suggestions and improvements are welcome.
 The goal is to build a universal privacy-preserving audit standard for Web3.
