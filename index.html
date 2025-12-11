@@ -1434,6 +1434,55 @@
             transform: rotate(360deg);
         }
     }
+        .header {
+    width: 100%;
+    background: #0d0d0d;
+    padding: 14px 0;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+
+.header-container {
+    width: 92%;
+    margin: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-img img {
+    width: 42px;
+    height: 42px;
+    object-fit: cover;
+    border-radius: 12px; /* Figma rounded style */
+    background: #1b1b1b;
+    box-shadow: 0 0 10px rgba(255,255,255,0.08);
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.logo-primary {
+    color: #f7c700;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.logo-secondary {
+    color: #e7e7e7;
+    font-size: 12px;
+    font-weight: 500;
+    opacity: 0.8;
+}
     </style>
 </head>
 <body>
@@ -1453,16 +1502,20 @@
 
     <!-- Header -->
     <header class="header" data-aos="fade-down">
-        <div class="header-container">
-            <div class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <div class="logo-text">
-                    <span class="logo-primary">INVISIBLE</span>
-                    <span class="logo-secondary">AUDIT</span>
-                </div>
+    <div class="header-container">
+
+        <div class="logo">
+            <div class="logo-img">
+                <img src="images/mylogo.png" alt="Logo">
             </div>
+
+            <div class="logo-text">
+                <span class="logo-primary">INVISIBLE</span>
+                <span class="logo-secondary">AUDIT</span>
+            </div>
+        </div>
+
+    </div>
             
             <nav class="nav">
                 <a href="index.html" class="nav-link active">
