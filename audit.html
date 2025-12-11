@@ -1452,6 +1452,19 @@
             font-size: 2.5rem;
         }
     }
+    .logo-img img {
+    width: 42px;
+    height: 42px;
+    object-fit: cover;
+    border-radius: 12px; /* Figma rounded style */
+    background: #1b1b1b;
+    box-shadow: 0 0 12px rgba(255,255,255,0.08);
+    transition: 0.3s ease;
+}
+
+.logo-img img:hover {
+    transform: scale(1.05);
+}
     </style>
 </head>
 <body>
@@ -1468,13 +1481,13 @@
     <header class="header" data-aos="fade-down">
         <div class="header-container">
             <div class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <div class="logo-text">
-                    <span class="logo-primary">INVISIBLE</span>
-                    <span class="logo-secondary">AUDIT</span>
-                </div>
+    <div class="logo-img">
+        <img src="assets/mylogo.png" alt="Logo">
+    </div>
+    <div class="logo-text">
+        <span class="logo-primary">INVISIBLE</span>
+        <span class="logo-secondary">AUDIT</span>
+    </div>
             </div>
             
             <nav class="nav">
